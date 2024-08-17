@@ -1,24 +1,24 @@
 import mongoose, { Schema } from "mongoose";
 
 const categorySchema = new Schema({
-    title: {
-        required: true,
+  title: {
+    required: true,
 
-        type: String,
-    },
+    type: String,
+  },
 
-    description: {
-        required: false,
+  description: {
+    required: false,
 
-        type: String,
-    },
+    type: String,
+  },
 
-    thumbnail: {
-        required: true,
+  thumbnail: {
+    required: true,
 
-        type: String,
-    },
+    type: String,
+  },
 });
 
 export const Category =
-    mongoose.models.Category ?? mongoose.model("Category", categorySchema);
+  mongoose.models.Category ?? mongoose.model("Category", categorySchema);

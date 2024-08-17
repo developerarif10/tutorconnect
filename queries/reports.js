@@ -65,6 +65,7 @@ export async function createWatchReport(data) {
         new mongoose.Types.ObjectId(data.lessonId)
       );
     }
+    // eslint-disable-next-line @next/next/no-assign-module-variable
     const module = await Module.findById(data.moduleId);
     const lessonIdsToCheck = module.lessonIds;
     const completedLessonsIds = report.totalCompletedLessons;

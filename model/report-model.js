@@ -1,9 +1,9 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const reportSchema = new Schema({
-  totalCompletedLessons : {
-      required: true,
-      type: Array,
+  totalCompletedLessons: {
+    required: true,
+    type: Array,
   },
 
   totalCompletedModeules: {
@@ -19,8 +19,9 @@ const reportSchema = new Schema({
 
   completion_date: {
     required: false,
-    type: Date
-  }
+    type: Date,
+  },
 });
 
-export const Report = mongoose.models.Report ?? mongoose.model("Report", reportSchema);
+export const Report =
+  mongoose.models.Report ?? mongoose.model("Report", reportSchema);

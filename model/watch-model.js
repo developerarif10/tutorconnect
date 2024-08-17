@@ -9,12 +9,12 @@ const watchSchema = new Schema({
   created_at: {
     required: true,
     type: Date,
-    default: Date.now()
+    default: Date.now(),
   },
   modified_at: {
     required: true,
     type: Date,
-    default: Date.now()
+    default: Date.now(),
   },
   lesson: { type: Schema.ObjectId, ref: "Lesson" },
   user: { type: Schema.ObjectId, ref: "User" },
@@ -26,4 +26,5 @@ const watchSchema = new Schema({
   },
 });
 
-export const Watch = mongoose.models.Watch ?? mongoose.model("Watch", watchSchema);
+export const Watch =
+  mongoose.models.Watch ?? mongoose.model("Watch", watchSchema);
