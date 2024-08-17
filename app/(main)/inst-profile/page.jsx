@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/formatPrice";
 import {
   ArrowRight,
-  ArrowRightIcon,
   BookOpen,
   MessageSquare,
   Presentation,

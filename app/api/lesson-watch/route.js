@@ -25,6 +25,7 @@ export async function POST(request) {
 
   const lesson = await getLesson(lessonId);
   const loggedinUser = await getLoggedInUser();
+  // eslint-disable-next-line @next/next/no-assign-module-variable
   const module = await getModuleBySlug(moduleSlug);
 
   if (!loggedinUser) {

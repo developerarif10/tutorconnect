@@ -17,6 +17,7 @@ export async function createLesson(data) {
     const createdLesson = await create({ title, slug, order });
     // console.log(createdLesson);
 
+    // eslint-disable-next-line @next/next/no-assign-module-variable
     const module = await Module.findById(moduleId);
     module.lessonIds.push(createdLesson._id);
     module.save();

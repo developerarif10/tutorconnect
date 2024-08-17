@@ -21,7 +21,6 @@ export const CourseActions = ({ courseId, isActive }) => {
 
     try {
       switch (action) {
-
         case "change-active": {
           const activeState = await changeCoursePublishState(courseId);
           setPublished(!activeState);
@@ -30,9 +29,11 @@ export const CourseActions = ({ courseId, isActive }) => {
           break;
         }
 
-        case "delete":  {
+        case "delete": {
           if (published) {
-            toast.error("A published course can not be deleted. First unpublish it, then delete.")
+            toast.error(
+              "A published course can not be deleted. First unpublish it, then delete."
+            );
           } else {
             await deleteCourse(courseId);
             toast.success("The course has been deleted successfully");
@@ -42,12 +43,10 @@ export const CourseActions = ({ courseId, isActive }) => {
           break;
         }
 
-
         default: {
           throw new Error("Invalid Course Action");
         }
       }
-
     } catch (e) {
       toast.error(e.message);
     }
@@ -56,11 +55,21 @@ export const CourseActions = ({ courseId, isActive }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex items-center gap-x-2">
-        <Button variant="outline" size="sm" onClick={() => setAction("change-active")}>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setAction("change-active")}
+        >
           {published ? "Unpublish" : "Publish"}
         </Button>
 
-        <Button type="submit" name="action" value="delete" size="sm" onClick={() => setAction("delete")}>
+        <Button
+          type="submit"
+          name="action"
+          value="delete"
+          size="sm"
+          onClick={() => setAction("delete")}
+        >
           <Trash className="h-4 w-4" />
         </Button>
       </div>

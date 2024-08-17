@@ -1,16 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import {
-  DragDropContext,
-  Droppable,
-  Draggable,
-  DropResult,
-} from "@hello-pangea/dnd";
+import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { Grip, Pencil } from "lucide-react";
+import { useEffect, useState } from "react";
 
-import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 export const ModuleList = ({ items, onReorder, onEdit }) => {
   const [isMounted, setIsMounted] = useState(false);
@@ -61,8 +56,7 @@ export const ModuleList = ({ items, onReorder, onEdit }) => {
                   <div
                     className={cn(
                       "flex items-center gap-x-2 bg-slate-200 border-slate-200 border text-slate-700 rounded-md mb-4 text-sm",
-                      module.active &&
-                        "bg-sky-100 border-sky-200 text-sky-700"
+                      module.active && "bg-sky-100 border-sky-200 text-sky-700"
                     )}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
@@ -70,8 +64,7 @@ export const ModuleList = ({ items, onReorder, onEdit }) => {
                     <div
                       className={cn(
                         "px-2 py-3 border-r border-r-slate-200 hover:bg-slate-300 rounded-l-md transition",
-                        module.active &&
-                          "border-r-sky-200 hover:bg-sky-200"
+                        module.active && "border-r-sky-200 hover:bg-sky-200"
                       )}
                       {...provided.dragHandleProps}
                     >

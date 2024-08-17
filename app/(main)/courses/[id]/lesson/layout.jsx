@@ -1,17 +1,12 @@
-import { CourseProgress } from "@/components/course-progress";
-import { cn } from "@/lib/utils";
-import { PlayCircle } from "lucide-react";
-import { Lock } from "lucide-react";
-import { CheckCircle } from "lucide-react";
-import { CourseSidebarMobile } from "./_components/course-sidebar-mobile";
 import { CourseSidebar } from "./_components/course-sidebar";
+import { CourseSidebarMobile } from "./_components/course-sidebar-mobile";
 
 import { getLoggedInUser } from "@/lib/loggedin-user";
 import { redirect } from "next/navigation";
 
 import { hasEnrollmentForCourse } from "@/queries/enrollments";
 
-const CourseLayout = async ({ children, params: {id} }) => {
+const CourseLayout = async ({ children, params: { id } }) => {
   const loggedinUser = await getLoggedInUser();
   if (!loggedinUser) {
     redirect("/login");
@@ -38,7 +33,9 @@ const CourseLayout = async ({ children, params: {id} }) => {
           <CourseSidebar courseId={id} />
           {/* sidebar ends */}
         </div>
-        <main className="lg:pl-96 pt-[80px] lg:pt-[20px] h-full col-span-10 px-4">{children}</main>
+        <main className="lg:pl-96 pt-[80px] lg:pt-[20px] h-full col-span-10 px-4">
+          {children}
+        </main>
       </div>
     </div>
   );

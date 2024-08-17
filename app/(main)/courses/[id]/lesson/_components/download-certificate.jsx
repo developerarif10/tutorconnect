@@ -1,16 +1,15 @@
-"use client"
+"use client";
 
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { toast } from "sonner";
 
-export const DownloadCertificate = ({courseId, totalProgress}) => {
+export const DownloadCertificate = ({ courseId, totalProgress }) => {
   const [isCertificateDownloading, setIsCertificateDownloading] =
     useState(false);
 
   async function handleCertificateDownload() {
     try {
-
       setIsCertificateDownloading(true);
       fetch(`/api/certificate?courseId=${courseId}`)
         .then((response) => response.blob())
@@ -22,7 +21,7 @@ export const DownloadCertificate = ({courseId, totalProgress}) => {
           document.body.appendChild(a);
           a.click();
           a.remove();
-        })
+        });
 
       toast.success("Certificate has been downloaded");
     } catch (err) {
@@ -36,8 +35,9 @@ export const DownloadCertificate = ({courseId, totalProgress}) => {
     <Button
       onClick={handleCertificateDownload}
       disabled={totalProgress < 100}
-      className="w-full mt-6">
+      className="w-full mt-6"
+    >
       Download Certificate
     </Button>
-  )
-}
+  );
+};

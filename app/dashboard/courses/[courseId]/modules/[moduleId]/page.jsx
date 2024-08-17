@@ -10,6 +10,7 @@ import { replaceMongoIdInArray } from "@/lib/convertData";
 import { getModule } from "@/queries/modules";
 
 const Module = async ({ params: { courseId, moduleId } }) => {
+  // eslint-disable-next-line @next/next/no-assign-module-variable
   const module = await getModule(moduleId);
   // console.log(module);
 

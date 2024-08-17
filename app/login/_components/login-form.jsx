@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 
@@ -15,12 +15,11 @@ import { Label } from "@/components/ui/label";
 
 import { ceredntialLogin } from "@/app/actions";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export function LoginForm() {
-
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const router = useRouter();
 
   async function onSubmit(event) {
@@ -31,7 +30,7 @@ export function LoginForm() {
       const response = await ceredntialLogin(formData);
 
       if (!!response.error) {
-        console.error(response.error)
+        console.error(response.error);
         setError(response.error);
       } else {
         router.push("/courses");
@@ -76,11 +75,11 @@ export function LoginForm() {
         <div className="mt-4 text-center text-sm">
           Don&apos;t have an account?{" "}
           <p>
-            Register as {" "}
+            Register as{" "}
             <Link href="/register/instructor" className="underline">
               Instructor
-            </Link>
-            {" "} or {" "}
+            </Link>{" "}
+            or{" "}
             <Link href="/register/student" className="underline">
               Student
             </Link>

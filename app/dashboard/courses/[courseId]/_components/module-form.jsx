@@ -52,6 +52,7 @@ export const ModulesForm = ({ initialData, courseId }) => {
       formData.append("courseId", courseId);
       formData.append("order", modules.length);
 
+      // eslint-disable-next-line @next/next/no-assign-module-variable
       const module = await createModule(formData);
 
       setModules((modules) => [

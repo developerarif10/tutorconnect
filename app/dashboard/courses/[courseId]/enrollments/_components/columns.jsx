@@ -1,18 +1,8 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { cn } from "@/lib/utils";
-import { GraduationCap } from "lucide-react";
-import { ArrowUpDown, MoreHorizontal, Pencil } from "lucide-react";
-import Link from "next/link";
 import { formatMyDate } from "@/lib/date";
+import { ArrowUpDown } from "lucide-react";
 
 export const columns = [
   {
@@ -69,7 +59,7 @@ export const columns = [
     },
     cell: ({ row }) => {
       const progress = row.getValue("progress");
-      return `${progress}%`
+      return `${progress}%`;
     },
   },
   {

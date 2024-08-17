@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 
@@ -15,21 +15,22 @@ import { Label } from "@/components/ui/label";
 
 import { useRouter } from "next/navigation";
 
-export function SignupForm({role}) {
+export function SignupForm({ role }) {
   const router = useRouter();
 
   async function onSubmit(event) {
     event.preventDefault();
 
-    try{
+    try {
       const formData = new FormData(event.currentTarget);
 
       const firstName = formData.get("first-name");
       const lastName = formData.get("last-name");
-      const email = formData.get('email');
-      const password = formData.get('password');
+      const email = formData.get("email");
+      const password = formData.get("password");
 
-      const userRole = ((role === "student") || (role === "instructor")) ? role : "student";
+      const userRole =
+        role === "student" || role === "instructor" ? role : "student";
 
       const response = await fetch("/api/register", {
         method: "POST",
@@ -41,13 +42,12 @@ export function SignupForm({role}) {
           lastName,
           email,
           password,
-          userRole
-        })
+          userRole,
+        }),
       });
 
       response.status === 201 && router.push("/login");
-
-    } catch(e){
+    } catch (e) {
       console.log(e.message);
     }
   }
@@ -66,11 +66,21 @@ export function SignupForm({role}) {
             <div className="grid grid-cols-2 gap-4">
               <div className="grid gap-2">
                 <Label htmlFor="first-name">First name</Label>
-                <Input id="first-name" name="first-name" placeholder="Max" required />
+                <Input
+                  id="first-name"
+                  name="first-name"
+                  placeholder="Max"
+                  required
+                />
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="last-name">Last name</Label>
-                <Input id="last-name" name="last-name" placeholder="Robinson" required />
+                <Input
+                  id="last-name"
+                  name="last-name"
+                  placeholder="Robinson"
+                  required
+                />
               </div>
             </div>
             <div className="grid gap-2">
@@ -89,7 +99,11 @@ export function SignupForm({role}) {
             </div>
             <div className="grid gap-2">
               <Label htmlFor="confirmPassword">Confirm Password</Label>
-              <Input id="confirmPassword" name="confirmPassword" type="password" />
+              <Input
+                id="confirmPassword"
+                name="confirmPassword"
+                type="password"
+              />
             </div>
             <Button type="submit" className="w-full">
               Create an account

@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
+import { updateLesson } from "@/app/actions/lesson";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -18,7 +19,6 @@ import { Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
-import { updateLesson } from "@/app/actions/lesson";
 
 const formSchema = z.object({
   isFree: z.boolean().default(false),
@@ -73,12 +73,7 @@ export const LessonAccessForm = ({ initialData, courseId, lessonId }) => {
         </Button>
       </div>
       {!isEditing && (
-        <p
-          className={cn(
-            "text-sm mt-2",
-            !free && "text-slate-500 italic"
-          )}
-        >
+        <p className={cn("text-sm mt-2", !free && "text-slate-500 italic")}>
           {free ? (
             <>This chapter is free for preview</>
           ) : (

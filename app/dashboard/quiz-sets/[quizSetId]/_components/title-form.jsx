@@ -5,6 +5,8 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
+import { updateQuizSet } from "@/app/actions/quiz";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -13,11 +15,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { updateQuizSet } from "@/app/actions/quiz";
+import { useState } from "react";
 
 const formSchema = z.object({
   title: z.string().min(1, {
@@ -40,7 +40,7 @@ export const TitleForm = ({ initialData = {}, quizSetId }) => {
 
   const onSubmit = async (values) => {
     try {
-      await updateQuizSet(quizSetId, values)
+      await updateQuizSet(quizSetId, values);
       toggleEdit();
       router.refresh();
     } catch (error) {

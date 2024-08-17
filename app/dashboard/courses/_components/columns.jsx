@@ -9,9 +9,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { GraduationCap } from "lucide-react";
-import { Star } from "lucide-react";
-import { ArrowUpDown, MoreHorizontal, Pencil } from "lucide-react";
+import {
+  ArrowUpDown,
+  GraduationCap,
+  MoreHorizontal,
+  Pencil,
+  Star,
+} from "lucide-react";
 import Link from "next/link";
 
 import { formatPrice } from "@/lib/formatPrice";
@@ -73,7 +77,7 @@ export const columns = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const id  = row.original._id;
+      const id = row.original._id;
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

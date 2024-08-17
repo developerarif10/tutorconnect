@@ -64,6 +64,7 @@ export async function updateModule(moduleId, data) {
 
 export async function changeModulePublishState(moduleId) {
   // console.log("changeModulePublishState", moduleId);
+  // eslint-disable-next-line @next/next/no-assign-module-variable
   const module = await Module.findById(moduleId);
   try {
     const res = await Module.findByIdAndUpdate(
