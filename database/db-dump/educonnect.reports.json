@@ -1,0 +1,27 @@
+[{
+  "_id": {
+    "$oid": "663a0ae8bfe65e5778eedf6d"
+  },
+  "totalCompletedLessons": [
+    {
+      "$oid": "663a0806bfe65e5778eedf35"
+    },
+    {
+      "$oid": "663a0806bfe65e5778eedf36"
+    }
+  ],
+  "totalCompletedModeules": [
+    {
+      "$oid": "663a0893bfe65e5778eedf3c"
+    }
+  ],
+  "course": {
+    "$oid": "664aca881387e2ad2e8be484"
+  },
+  "student": {
+    "$oid": "66504fc6171d3fa703e7e05b"
+  },
+  "quizAssessment": {
+    "$oid": "663b144d94bdaddfbf619390"
+  }
+}]

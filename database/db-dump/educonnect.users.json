@@ -1,0 +1,120 @@
+[{
+  "_id": {
+    "$oid": "663a06e7bfe65e5778eedf2a"
+  },
+  "firstName": "John",
+  "lastName": "Doe",
+  "password": "password123",
+  "email": "john.doe@example.com",
+  "phone": "+1234567890",
+  "role": "instructor",
+  "bio": "Experienced educator passionate about fostering student learning and development.",
+  "socialMedia": {
+    "twitter": "@johndoe",
+    "linkedin": "linkedin.com/in/johndoe",
+    "facebook": "facebook.com/johndoe"
+  },
+  "profilePicture": "https://i.pravatar.cc",
+  "designation": "Senior Software Engineer, Dell Inc."
+},
+{
+  "_id": {
+    "$oid": "663a0b36bfe65e5778eedf7e"
+  },
+  "password": "securepassword",
+  "email": "michael.brown@example.com",
+  "phone": "+4455667788",
+  "role": "student",
+  "bio": "Passionate about finance and investing.",
+  "social_media": {
+    "linkedin": "https://linkedin.com/in/michaelbrown"
+  },
+  "designation": "Junior Develeoper, Acme",
+  "profilePicture": "https://i.pravatar.cc",
+  "firstName": "Michael",
+  "lastName": "Brown"
+},
+{
+  "_id": {
+    "$oid": "664accf41387e2ad2e8be488"
+  },
+  "password": "securepassword",
+  "email": "alex.brown@example.com",
+  "phone": "+42255667788",
+  "role": "student",
+  "bio": "I love programming, I eat JavaScript",
+  "social_media": {
+    "linkedin": "https://linkedin.com/in/alexbrown"
+  },
+  "designation": "Junior Develeoper, OpenText",
+  "profilePicture": "https://i.pravatar.cc",
+  "firstName": "Alex",
+  "lastName": "Brown"
+},
+{
+  "_id": {
+    "$oid": "664adddc1387e2ad2e8be4a0"
+  },
+  "password": "$2a$05$8B0y89Z7Gt/RlepneilmY.GRnX/G6O7RfvA61QpOG2M.H0r3PLdIG",
+  "email": "fatima.shekh@example.com",
+  "phone": "+88255667788",
+  "role": "student",
+  "bio": "love coding and game",
+  "social_media": {
+    "linkedin": "https://linkedin.com/in/fatima"
+  },
+  "designation": "Ghoral",
+  "profilePicture": "https://i.pravatar.cc",
+  "lastName": "Sheikh",
+  "firstName": "Fatima"
+},
+{
+  "_id": {
+    "$oid": "664d8582439c45ebdc6f0e26"
+  },
+  "firstName": "test",
+  "lastName": "test",
+  "password": "$2a$05$g1XX1jFI0nwRjCX2ORiCxuHYlyVep/G4Jcqw1u4Eyt4GrV86V938.",
+  "email": "test@test.com",
+  "role": "student",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66504f85171d3fa703e7e043"
+  },
+  "firstName": "Tapas",
+  "lastName": "Adhikary",
+  "password": "$2a$05$Kih1jnVYNDlNoABVmmxVceVnyY8Yr0kmOS6rIX/uzrWLBCQEi5i0S",
+  "email": "tapas.adhikary@gmail.com",
+  "role": "instructor",
+  "__v": 0,
+  "bio": "An educator for a decade and a life-long learner",
+  "designation": "Founder, tapaScript | Co-Founder, CreoWis | 20 Years in Software Development",
+  "profilePicture": "https://res.cloudinary.com/atapas/image/upload/v1646745540/profile/face_x0vrxt.jpg"
+},
+{
+  "_id": {
+    "$oid": "66504fc6171d3fa703e7e05b"
+  },
+  "firstName": "ReactPlay",
+  "lastName": "IO",
+  "password": "$2a$05$eGyHsDPi.Ib0DGPJPlSQd.XFxvp4bmp3SLu.T.A7eOR/2gXVMc6My",
+  "email": "ioreactplay@gmail.com",
+  "role": "student",
+  "__v": 0,
+  "profilePicture": "https://res.cloudinary.com/reactplay/image/upload/v1686126339/logos/twitter-thumb_fiuv8m.png",
+  "designation": "Open Source Project by Tapas",
+  "bio": "Having 1K+ Star"
+},
+{
+  "_id": {
+    "$oid": "66509f695f7ef01511c20c7b"
+  },
+  "firstName": "T",
+  "lastName": "H",
+  "password": "$2a$05$J3lCpL8ZLIhFW9.rwrDy6.UNqzhtEumUbyJ5SycwK/en5XBitf0Ia",
+  "email": "t@t.com",
+  "role": "instructor",
+  "__v": 0
+}]
