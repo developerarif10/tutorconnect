@@ -80,7 +80,7 @@ function QuizModal({ courseId, quizSetId, quizzes, open, setOpen }) {
             <h3 className="text-xl font-medium mb-10">
               <svg
                 className="text-success inline"
-                stroke-width="0"
+                strokeWidth="0"
                 viewBox="0 0 512 512"
                 height="1em"
                 width="1em"
@@ -98,7 +98,7 @@ function QuizModal({ courseId, quizSetId, quizzes, open, setOpen }) {
               <svg
                 stroke="currentColor"
                 fill="currentColor"
-                stroke-width="0"
+                strokeWidth="0"
                 version="1.1"
                 viewBox="0 0 16 16"
                 class="text-success inline"

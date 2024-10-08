@@ -6,6 +6,8 @@ import {
 
 import { Video } from "lucide-react";
 
+import Loading from "@/app/loading";
+import { Suspense } from "react";
 import CourseLessonList from "./CourseLessonList";
 
 const CourseModuleList = ({ module }) => {
@@ -18,7 +20,7 @@ const CourseModuleList = ({ module }) => {
       <AccordionTrigger>{module?.title}</AccordionTrigger>
       <AccordionContent>
         {/* header */}
-        <div class="flex gap-x-5 items-center flex-wrap mt-4 mb-6 text-gray-600 text-sm">
+        <div classname="flex gap-x-5 items-center flex-wrap mt-4 mb-6 text-gray-600 text-sm">
           <span className="flex items-center gap-1.5">
             <Video className="w-4 h-4" />
             {(totalDuration / 3660).toPrecision(2)} Hours
@@ -27,10 +29,12 @@ const CourseModuleList = ({ module }) => {
         {/* header ends */}
 
         <div className="space-y-3">
-          {module?.lessonIds &&
-            module?.lessonIds.map((lessonId) => (
-              <CourseLessonList lessonId={lessonId} key={lessonId.index} />
-            ))}
+          <Suspense fallback={<Loading />}>
+            {module?.lessonIds &&
+              module?.lessonIds.map((lessonId) => (
+                <CourseLessonList lessonId={lessonId} key={lessonId.index} />
+              ))}
+          </Suspense>
         </div>
       </AccordionContent>
     </AccordionItem>

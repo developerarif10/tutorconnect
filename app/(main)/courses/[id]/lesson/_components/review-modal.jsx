@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -29,7 +28,7 @@ const formSchema = z.object({
     message: "Description is required!",
   }),
 });
-export const ReviewModal = ({ open, setOpen }) => {
+export const ReviewModal = ({ open, setOpen, courseId, userId }) => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -42,6 +41,14 @@ export const ReviewModal = ({ open, setOpen }) => {
 
   const onSubmit = async (values) => {
     try {
+      // const formData = new FormData();
+      // formData.append("content", values?.content);
+      // formData.append("courseId", values?.courseId);
+      // formData.append("rating"), values?.rating;
+      // formData.append("userId", values?.userId);
+
+      // const testimonial = await createTestmonial(formData);
+
       toast.success("Review added");
       setOpen(false);
     } catch (error) {
@@ -69,7 +76,7 @@ export const ReviewModal = ({ open, setOpen }) => {
               name="rating"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Course Title</FormLabel>
+                  <FormLabel>Give Review</FormLabel>
                   <FormControl>
                     <Input
                       disabled={isSubmitting}
@@ -90,7 +97,7 @@ export const ReviewModal = ({ open, setOpen }) => {
               name="review"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Your Review</FormLabel>
+                  <FormLabel>Write a brief overview about the course</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Course review"
@@ -98,9 +105,9 @@ export const ReviewModal = ({ open, setOpen }) => {
                       {...field}
                     />
                   </FormControl>
-                  <FormDescription>
+                  {/* <FormDescription>
                     Write a brief overview about the course
-                  </FormDescription>
+                  </FormDescription> */}
                   <FormMessage />
                 </FormItem>
               )}

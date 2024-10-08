@@ -4,7 +4,9 @@ import FilterCourseMobile from "./_components/FilterCourseMobile";
 import SearchCourse from "./_components/SearchCourse";
 import SortCourse from "./_components/SortCourse";
 
+import Loading from "@/app/loading";
 import { getCourseList } from "@/queries/courses";
+import { Suspense } from "react";
 import CourseCard from "./_components/CourseCard";
 
 const CoursesPage = async () => {
@@ -42,9 +44,11 @@ const CoursesPage = async () => {
           <FilterCourse />
           {/* Course grid */}
           <div className="lg:col-span-3 grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4">
-            {courses.map((course) => {
-              return <CourseCard key={course.id} course={course} />;
-            })}
+            <Suspense fallback={<Loading />}>
+              {courses.map((course) => {
+                return <CourseCard key={course.id} course={course} />;
+              })}
+            </Suspense>
           </div>
         </div>
       </section>

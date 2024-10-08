@@ -115,7 +115,7 @@ export async function getCourseDetailsByInstructor(instructorId, expand) {
   }, 0);
 
   const testimonials = await Promise.all(
-    publishedCourses.map(async (course) => {
+    publishedCourses?.map(async (course) => {
       const testimonial = await getTestimonialsForCourse(course._id.toString());
       return testimonial;
     })

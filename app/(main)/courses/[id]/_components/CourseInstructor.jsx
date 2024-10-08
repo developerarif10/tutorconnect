@@ -9,7 +9,7 @@ const CourseInstructor = async ({ course }) => {
 
   const fullName = `${instructor?.firstName}  ${instructor?.lastName}`;
   const courseDetailsByInstructor = await getCourseDetailsByInstructor(
-    instructor._id.toString()
+    instructor?._id.toString()
   );
 
   // console.log(courseDetailsByInstructor)

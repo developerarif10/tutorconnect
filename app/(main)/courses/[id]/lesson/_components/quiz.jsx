@@ -27,20 +27,20 @@ export function Quiz({ courseId, quizSet, isTaken }) {
   // console.log({quizzes});
   return (
     <>
-      <div class="max-w-[270px] bg-white border border-border rounded-md dark:bg-gray-800 dark:border-gray-700 overflow-hidden">
+      <div className="max-w-[270px] bg-white border border-border rounded-md dark:bg-gray-800 dark:border-gray-700 overflow-hidden">
         <div className="flex h-32 items-center justify-center bg-gradient-to-r from-sky-500 to-indigo-500 px-6 text-center">
           <span className="text-lg font-semibold text-white">
             {quizSet.title}
           </span>
         </div>
-        <div class="p-4">
+        <div className="p-4">
           <div className="flex items-center justify-between gap-6 text-sm mb-2 font-medium text-gray-700">
             <span>Total Mark</span>
             <Badge className="bg-success/20 text-primary hover:bg-success/20">
               {quizSet.quizIds ? quizSet.quizIds.length * 5 : 0}
             </Badge>
           </div>
-          <p class="mb-4 font-normal text-gray-500 dark:text-gray-400 text-sm">
+          <p className="mb-4 font-normal text-gray-500 dark:text-gray-400 text-sm">
             Taking the quiz is optional but it is highly recommended.
           </p>
           <Button
@@ -51,9 +51,9 @@ export function Quiz({ courseId, quizSet, isTaken }) {
             <svg
               stroke="currentColor"
               fill="currentColor"
-              stroke-width="0"
+              strokeWidth="0"
               viewBox="0 0 24 24"
-              class="h-4 w-4"
+              className="h-4 w-4"
               height="1em"
               width="1em"
               xmlns="http://www.w3.org/2000/svg"

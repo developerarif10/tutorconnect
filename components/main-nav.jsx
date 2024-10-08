@@ -6,7 +6,6 @@ import { useState } from "react";
 
 import { MobileNav } from "@/components/mobile-nav";
 import { Menu, X } from "lucide-react";
-import { Logo } from "./logo";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button, buttonVariants } from "./ui/button";
 import {
@@ -19,6 +18,7 @@ import {
 import { signOut, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { useEffect } from "react";
+import { Logo } from "./logo";
 
 export function MainNav({ items, children }) {
   const { data: session } = useSession();
@@ -75,7 +75,7 @@ export function MainNav({ items, children }) {
           <MobileNav items={items}>{children}</MobileNav>
         )}
       </div>
-      <nav className="flex items-center gap-3">
+      <nav className="flex items-center gap-3 mix-blend-multiply">
         {!loginSession && (
           <div className="items-center gap-3 hidden lg:flex">
             <Link
