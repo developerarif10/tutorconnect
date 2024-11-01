@@ -17,10 +17,9 @@ export async function createLesson(data) {
     const createdLesson = await create({ title, slug, order });
     // console.log(createdLesson);
 
-    // eslint-disable-next-line @next/next/no-assign-module-variable
-    const module = await Module.findById(moduleId);
-    module.lessonIds.push(createdLesson._id);
-    module.save();
+    const moduleContent = await Module.findById(moduleId);
+    moduleContent.lessonIds.push(createdLesson._id);
+    moduleContent.save();
 
     return createdLesson;
   } catch (err) {
@@ -66,10 +65,10 @@ export async function changeLessonPublishState(lessonId) {
 
 export async function deleteLesson(lessonId, moduleId) {
   try {
-    const module = await Module.findById(moduleId);
-    module.lessonIds.pull(new mongoose.Types.ObjectId(lessonId));
+    const moduleContent = await Module.findById(moduleId);
+    moduleContent.lessonIds.pull(new mongoose.Types.ObjectId(lessonId));
     await Lesson.findByIdAndDelete(lessonId);
-    module.save();
+    moduleContent.save();
   } catch (err) {
     throw new Error(err);
   }

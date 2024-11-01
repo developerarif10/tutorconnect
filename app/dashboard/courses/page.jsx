@@ -14,5 +14,5 @@ const CoursesPage = async () => {
     </div>
   );
 };
-
+export const dynamic = "force-dynamic";
 export default CoursesPage;

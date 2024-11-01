@@ -24,7 +24,7 @@ export const SidebarModules = ({ courseId, modules }) => {
     });
   });
 
-  const exapndModuleId = expandModule?.id ?? allModules[0].id;
+  const exapndModuleId = expandModule?.id ?? allModules[0]?.id;
 
   return (
     <Accordion

@@ -52,6 +52,10 @@ export const {
   handlers: { GET, POST },
 } = NextAuth({
   ...authConfig,
+  pages: {
+    signIn: "/auth/login",
+    error: "/auth/error",
+  },
   providers: [
     CredentialsProvider({
       async authorize(credentials) {

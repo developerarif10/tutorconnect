@@ -1,92 +1,83 @@
-import fontkit from "@pdf-lib/fontkit";
-import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
-
+import { formatMyDate } from "@/lib/date";
 import { getLoggedInUser } from "@/lib/loggedin-user";
 import { getCourseDetails } from "@/queries/courses";
 import { getAReport } from "@/queries/reports";
+import fontkit from "@pdf-lib/fontkit";
+export const dynamic = "force-dynamic";
 
-import { formatMyDate } from "@/lib/date";
+import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 
-// Fetch custom fonts
-const kalamFontUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/fonts/kalam/Kalam-Regular.ttf`;
-const kalamFontBytes = await fetch(kalamFontUrl).then((res) =>
-  res.arrayBuffer()
-);
-// console.log({
-//   env: process.env.NEXT_PUBLIC_BASE_URL,
-// });
-// console.log({
-//   kalamFontUrl,
-//   kalamFontBytes,
-// });
+async function loadFonts() {
+  const kalamFontUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/fonts/kalam/kalam-Regular.ttf`;
+  const montserratFontUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/fonts/montserrat/Montserrat-Medium.ttf`;
+  const montserratItalicFontUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/fonts/montserrat/Montserrat-Italic.ttf`;
 
-const montserratItalicFontUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/fonts/montserrat/Montserrat-Italic.ttf`;
-const montserratItalicFontBytes = await fetch(montserratItalicFontUrl).then(
-  (res) => res.arrayBuffer()
-);
-// console.log({
-//   montserratItalicFontUrl,
-//   montserratItalicFontBytes,
-// });
-const montserratFontUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/fonts/montserrat/Montserrat-Medium.ttf`;
-const montserratFontBytes = await fetch(montserratFontUrl).then((res) =>
-  res.arrayBuffer()
-);
-// console.log({
-//   montserratFontUrl,
-//   montserratFontBytes,
-// });
+  const [kalamFontBytes, montserratFontBytes, montserratItalicFontBytes] =
+    await Promise.all([
+      fetch(kalamFontUrl).then((res) => res.arrayBuffer()),
+      fetch(montserratFontUrl).then((res) => res.arrayBuffer()),
+      fetch(montserratItalicFontUrl).then((res) => res.arrayBuffer()),
+    ]);
+
+  return {
+    kalamFontBytes,
+    montserratFontBytes,
+    montserratItalicFontBytes,
+  };
+}
 
 export async function GET(request) {
   try {
-    /* -----------------
-     *
-     * Configuratios
-     *
-     *-------------------*/
+    // Load fonts at runtime instead of build time
+    const fonts = await loadFonts();
+
+    const response = await fetch(url, {
+      signal: AbortSignal.timeout(5000),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
     const searchParams = request.nextUrl.searchParams;
     const courseId = searchParams.get("courseId");
+
     const course = await getCourseDetails(courseId);
+
     const loggedInUser = await getLoggedInUser();
 
     const report = await getAReport({
       course: courseId,
       student: loggedInUser.id,
     });
-    // console.log(report?.completion_date);
+
     const completionDate = report?.completion_date
       ? formatMyDate(report?.completion_date)
       : formatMyDate(Date.now());
-    // console.log(completionDate);
 
     const completionInfo = {
       name: `${loggedInUser?.firstName} ${loggedInUser?.lastName}`,
       completionDate: completionDate,
-      courseName: course.title,
+      courseName: course?.title,
       instructor: `${course?.instructor?.firstName} ${course?.instructor?.lastName}`,
       instructorDesignation: `${course?.instructor?.designation}`,
       sign: "/sign.png",
     };
 
-    // console.log(completionInfo);
-
     const pdfDoc = await PDFDocument.create();
     pdfDoc.registerFontkit(fontkit);
 
-    const kalamFont = await pdfDoc.embedFont(kalamFontBytes);
-    const montserratItalic = await pdfDoc.embedFont(montserratItalicFontBytes);
+    const kalamFont = await pdfDoc.embedFont(fonts.kalamFontBytes);
+    const montserratItalic = await pdfDoc.embedFont(
+      fonts.montserratItalicFontBytes
+    );
+    const montserrat = await pdfDoc.embedFont(fonts.montserratFontBytes);
 
-    const montserrat = await pdfDoc.embedFont(montserratFontBytes);
-
-    const page = pdfDoc.addPage([841.89, 595.28]);
+    const page = pdfDoc.addPage([844.89, 595.28]);
     const { width, height } = page.getSize();
     const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
 
-    /* -----------------
-     *
-     * Logo
-     *
-     *-------------------*/
+    // logo
+
     const logoUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/logo.png`;
     const logoBytes = await fetch(logoUrl).then((res) => res.arrayBuffer());
     const logo = await pdfDoc.embedPng(logoBytes);
@@ -253,6 +244,13 @@ export async function GET(request) {
       headers: { "content-type": "application/pdf" },
     });
   } catch (error) {
-    console.log(error);
+    console.error("Certificate API Error:", error);
+    return new Response(
+      JSON.stringify({ error: "Failed to fetch certificate" }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   }
 }

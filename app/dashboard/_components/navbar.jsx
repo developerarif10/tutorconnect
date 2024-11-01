@@ -15,6 +15,9 @@ import { useEffect, useState } from "react";
 
 export const Navbar = () => {
   const [loggedInUser, setLoggedInUser] = useState(null);
+  const firstLetter =
+    loggedInUser?.firstName?.charAt(0).toUpperCase() +
+    loggedInUser?.lastName?.charAt(0).toUpperCase();
 
   useEffect(() => {
     async function fetchMe() {
@@ -38,7 +41,7 @@ export const Navbar = () => {
             <div className="cursor-pointer">
               <Avatar>
                 <AvatarImage src={loggedInUser?.profilePicture} alt="@shadcn" />
-                <AvatarFallback>CN</AvatarFallback>
+                <AvatarFallback>{firstLetter}</AvatarFallback>
               </Avatar>
             </div>
           </DropdownMenuTrigger>

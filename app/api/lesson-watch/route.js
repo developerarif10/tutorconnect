@@ -25,8 +25,7 @@ export async function POST(request) {
 
   const lesson = await getLesson(lessonId);
   const loggedinUser = await getLoggedInUser();
-  // eslint-disable-next-line @next/next/no-assign-module-variable
-  const module = await getModuleBySlug(moduleSlug);
+  const moduleContent = await getModuleBySlug(moduleSlug);
 
   if (!loggedinUser) {
     return new NextResponse(`You are not authenticated.`, {
@@ -49,7 +48,7 @@ export async function POST(request) {
   const watchEntry = {
     lastTime,
     lesson: lesson.id,
-    module: module.id,
+    module: moduleContent.id,
     user: loggedinUser.id,
     state,
   };
@@ -57,7 +56,7 @@ export async function POST(request) {
   try {
     const found = await Watch.findOne({
       lesson: lessonId,
-      module: module.id,
+      module: moduleContent.id,
       user: loggedinUser.id,
     }).lean();
 
@@ -77,7 +76,12 @@ export async function POST(request) {
           await Watch.findByIdAndUpdate(found._id, {
             state: COMPLETED,
           });
-          await updateReport(loggedinUser.id, courseId, module.id, lessonId);
+          await updateReport(
+            loggedinUser.id,
+            courseId,
+            moduleContent.id,
+            lessonId
+          );
         }
       }
     }

@@ -10,11 +10,10 @@ import { replaceMongoIdInArray } from "@/lib/convertData";
 import { getModule } from "@/queries/modules";
 
 const Module = async ({ params: { courseId, moduleId } }) => {
-  // eslint-disable-next-line @next/next/no-assign-module-variable
-  const module = await getModule(moduleId);
+  const moduleContent = await getModule(moduleId);
   // console.log(module);
 
-  const lessons = replaceMongoIdInArray(module.lessonIds).sort(
+  const lessons = replaceMongoIdInArray(moduleContent.lessonIds).sort(
     (a, b) => a.order - b.order
   );
 
@@ -22,7 +21,7 @@ const Module = async ({ params: { courseId, moduleId } }) => {
 
   return (
     <>
-      {!module?.active && (
+      {!moduleContent?.active && (
         <AlertBanner
           label="This module is unpublished. It will not be visible in the course."
           variant="warning"
@@ -40,7 +39,7 @@ const Module = async ({ params: { courseId, moduleId } }) => {
               Back to course setup
             </Link>
             <div className="flex items-center justify-end">
-              <ModuleActions module={module} courseId={courseId} />
+              <ModuleActions module={moduleContent} courseId={courseId} />
             </div>
           </div>
         </div>

@@ -22,7 +22,7 @@ const Course = async ({ params: { id }, searchParams: { name, module } }) => {
 
   const lessonToPlay = name ? await getLessonBySlug(name) : defaultLesson;
 
-  const defaultModule = module ?? allModules[0].slug;
+  const defaultModule = module ?? allModules[0]?.slug;
 
   // console.log({lessonToPlay});
 
@@ -39,7 +39,7 @@ const Course = async ({ params: { id }, searchParams: { name, module } }) => {
         <div>
           <div className="p-4 flex flex-col md:flex-row items-center justify-between">
             <h2 className="text-2xl font-semibold mb-2">
-              {lessonToPlay.title}
+              {lessonToPlay?.title}
             </h2>
           </div>
           <Separator />

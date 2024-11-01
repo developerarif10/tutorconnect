@@ -27,7 +27,10 @@ export function MainNav({ items, children }) {
   const [loginSession, setLoginSession] = useState(null);
   const [loggedInUser, setLoggedInUser] = useState(null);
 
-  // console.log(session);
+  const firstLetter =
+    loggedInUser?.firstName?.charAt(0).toUpperCase() +
+    loggedInUser?.lastName?.charAt(0).toUpperCase();
+  // console.log(firstletter);
 
   if (session?.error === "RefreshAccessTokenError") {
     redirect("/login");
@@ -106,7 +109,7 @@ export function MainNav({ items, children }) {
             <div className="cursor-pointer">
               <Avatar>
                 <AvatarImage src={loggedInUser?.profilePicture} alt="@shadcn" />
-                <AvatarFallback>CN</AvatarFallback>
+                <AvatarFallback>{firstLetter}</AvatarFallback>
               </Avatar>
             </div>
           </DropdownMenuTrigger>

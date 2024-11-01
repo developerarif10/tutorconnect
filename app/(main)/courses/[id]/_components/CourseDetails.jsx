@@ -8,7 +8,7 @@ import CourseOverview from "./CourseOverview";
 import Image from "next/image";
 
 const CourseDetails = ({ course }) => {
-  const lastModifiedDate = formatMyDate(course.modifiedOn);
+  const lastModifiedDate = formatMyDate(course?.modifiedOn);
 
   return (
     <section className="py-8 md:py-12 lg:py-24">
