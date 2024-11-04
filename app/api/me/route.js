@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
 import { getUserByEmail } from "@/queries/users";
-import { dbConnect } from "@/service/mongo";
+import dbConnect from "@/service/mongo";
 
 import { NextResponse } from "next/server";
 

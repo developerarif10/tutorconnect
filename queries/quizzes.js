@@ -5,9 +5,11 @@ import {
   replaceMongoIdInArray,
   replaceMongoIdInObject,
 } from "@/lib/convertData";
+import dbConnect from "@/service/mongo";
 
 export async function getAllQuizSets(excludeUnPublished) {
   try {
+    await dbConnect();
     let quizSets = [];
     if (excludeUnPublished) {
       quizSets = await Quizset.find({ active: true }).lean();
@@ -22,6 +24,8 @@ export async function getAllQuizSets(excludeUnPublished) {
 
 export async function getQuizSetById(id) {
   try {
+    await dbConnect();
+
     const quizSet = await Quizset.findById(id)
       .populate({
         path: "quizIds",
@@ -36,6 +40,8 @@ export async function getQuizSetById(id) {
 
 export async function createQuiz(quizData) {
   try {
+    await dbConnect();
+
     const quiz = await Quiz.create(quizData);
     return quiz._id.toString();
   } catch (e) {

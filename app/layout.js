@@ -1,6 +1,6 @@
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
-import { dbConnect } from "@/service/mongo";
+import dbConnect from "@/service/mongo";
 import { Inter } from "next/font/google";
 import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });

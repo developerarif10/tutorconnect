@@ -2,6 +2,7 @@ import { formatMyDate } from "@/lib/date";
 import { getLoggedInUser } from "@/lib/loggedin-user";
 import { getCourseDetails } from "@/queries/courses";
 import { getAReport } from "@/queries/reports";
+import dbConnect from "@/service/mongo";
 import fontkit from "@pdf-lib/fontkit";
 export const dynamic = "force-dynamic";
 
@@ -27,6 +28,7 @@ async function loadFonts() {
 }
 
 export async function GET(request) {
+  await dbConnect();
   try {
     // Load fonts at runtime instead of build time
     const fonts = await loadFonts();

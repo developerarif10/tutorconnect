@@ -1,5 +1,5 @@
 import { User } from "@/model/user-model";
-import { dbConnect } from "@/service/mongo";
+import dbConnect from "@/service/mongo";
 
 import { NextResponse } from "next/server";
 
@@ -24,7 +24,6 @@ export const POST = async (request) => {
   };
 
   // console.log(newUser);
-
   try {
     await User.create(newUser);
     return new NextResponse("User has been created", {

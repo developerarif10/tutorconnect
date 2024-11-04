@@ -2,11 +2,14 @@ import { replaceMongoIdInObject } from "@/lib/convertData";
 import { Assessment } from "@/model/assessment-model";
 import { Module } from "@/model/module.model";
 import { Report } from "@/model/report-model";
+import dbConnect from "@/service/mongo";
 import mongoose from "mongoose";
 import { getCourseDetails } from "./courses";
 
 export async function getAReport(filter) {
   try {
+    await dbConnect();
+
     const report = await Report.findOne(filter)
       .populate({
         path: "quizAssessment",
@@ -22,6 +25,8 @@ export async function getAReport(filter) {
 export async function createAssessmentReport(data) {
   // console.log(data);
   try {
+    await dbConnect();
+
     let report = await Report.findOne({
       course: data.courseId,
       student: data.userId,
@@ -45,6 +50,8 @@ export async function createAssessmentReport(data) {
 
 export async function createWatchReport(data) {
   try {
+    await dbConnect();
+
     let report = await Report.findOne({
       course: data.courseId,
       student: data.userId,

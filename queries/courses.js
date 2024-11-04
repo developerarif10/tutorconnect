@@ -12,10 +12,12 @@ import {
   replaceMongoIdInObject,
 } from "@/lib/convertData";
 
+import dbConnect from "@/service/mongo";
 import { getEnrollmentsForCourse } from "./enrollments";
 import { getTestimonialsForCourse } from "./testimonials";
 
 export async function getCourseList() {
+  await dbConnect();
   const courses = await Course.find({ active: true })
     .select([
       "title",
@@ -147,6 +149,7 @@ export async function getCourseDetailsByInstructor(instructorId, expand) {
 
 export async function create(courseData) {
   try {
+    await dbConnect();
     const course = await Course.create(courseData);
     return JSON.parse(JSON.stringify(course));
   } catch (err) {
