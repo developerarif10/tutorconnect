@@ -94,7 +94,7 @@ export async function getCourseDetailsByInstructor(instructorId, expand) {
   }).lean();
 
   const enrollments = await Promise.all(
-    publishedCourses.map(async (course) => {
+    publishedCourses?.map(async (course) => {
       const enrollment = await getEnrollmentsForCourse(course._id.toString());
       return enrollment;
     })
