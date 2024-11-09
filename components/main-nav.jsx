@@ -1,11 +1,10 @@
 "use client";
 
+import { MobileNav } from "@/components/mobile-nav";
 import { cn } from "@/lib/utils";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-
-import { MobileNav } from "@/components/mobile-nav";
-import { Menu, X } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button, buttonVariants } from "./ui/button";
 import {

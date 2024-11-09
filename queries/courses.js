@@ -100,6 +100,20 @@ export async function getCourseDetailsByInstructor(instructorId, expand) {
     })
   );
 
+  // Handle case where Object.groupBy is not available (Node.js < 21)
+  if (!Object.groupBy) {
+    Object.groupBy = function (arr, fn) {
+      return arr.reduce((grouped, item) => {
+        const key = typeof fn === "function" ? fn(item) : item[fn];
+        if (!grouped[key]) {
+          grouped[key] = [];
+        }
+        grouped[key].push(item);
+        return grouped;
+      }, {});
+    };
+  }
+
   const groupedByCourses = Object.groupBy(
     enrollments.flat(),
     ({ course }) => course
