@@ -33,6 +33,7 @@
     "cmdk": "^1.0.0",
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.1.1",
+    "framer-motion": "^11.11.11",
     "lucide-react": "^0.378.0",
     "mongoose": "^8.4.0",
     "next": "14.2.3",
@@ -50,7 +51,7 @@
     "sharp": "^0.33.5",
     "sonner": "^1.4.41",
     "stripe": "^15.8.0",
-    "tailwind-merge": "^2.3.0",
+    "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.23.8"
   },

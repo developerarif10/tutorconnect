@@ -8,6 +8,7 @@ export function SiteFooter({ className }) {
         <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
           <Logo />
         </div>
+        <p className="text-sm">© 2024 Tutor Connect. All rights reserved.</p>
         <p className="text-center text-sm leading-loose md:text-left">
           Built by{" "}
           <a

@@ -8,12 +8,14 @@ import Link from "next/link";
 import { getCategories } from "@/queries/categories";
 import { getCourseList } from "@/queries/courses";
 
+import { InfiniteMovingCardsPage } from "@/components/ui/testimonial-cards";
+import { getOverallReviews } from "@/queries/testimonials";
 import CourseCard from "./courses/_components/CourseCard";
 
 const HomePage = async () => {
   const courses = await getCourseList();
   const categories = await getCategories();
-
+  const testimonials = await getOverallReviews();
   return (
     <>
       <section className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32 grainy">
@@ -100,7 +102,7 @@ const HomePage = async () => {
       </section>
 
       {/* Courses */}
-      <section id="courses" className="container space-y-6   md:py-12 lg:py-24">
+      <section id="courses" className="container space-y-6 md:py-12 lg:py-24">
         <div className="flex items-center justify-between">
           <SectionTitle>Courses</SectionTitle>
           <Link
@@ -114,6 +116,18 @@ const HomePage = async () => {
           {courses.map((course) => {
             return <CourseCard key={course.id} course={course} />;
           })}
+        </div>
+      </section>
+
+      <section id="testimonials" className="container space-y-6">
+        <div className="flex items-center justify-between">
+          <SectionTitle>
+            Get a glimpse of what others are achieving through learning
+          </SectionTitle>
+        </div>
+
+        <div className="grid">
+          <InfiniteMovingCardsPage testimonials={testimonials} />
         </div>
       </section>
     </>
