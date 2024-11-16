@@ -20,5 +20,5 @@ const overallReviewsSchema = new Schema({
 });
 
 export const OverallReviews =
-  mongoose.models.OverallReviews ??
+  mongoose.models.OverallReviews ||
   mongoose.model("OverallReviews", overallReviewsSchema);

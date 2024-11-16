@@ -1,5 +1,6 @@
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
+import ThemeProvider from "@/providers/ThemeProvider";
 import dbConnect from "@/service/mongo";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -16,8 +17,11 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={cn(inter.className, poppins.className)}>
-        {children}
-        <Toaster richColors position="top-center" />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {/* <ThemeSwitcher /> */}
+          {children}
+          <Toaster richColors position="top-center" />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -18,7 +18,7 @@ const SORT_OPTIONS = [
 const SortCourse = () => {
   return (
     <Select>
-      <SelectTrigger className="w-[180px] border-none !border-b focus:ring-0 focus:ring-offset-0  overflow-hidden">
+      <SelectTrigger className="w-[180px] focus:ring-0 focus:ring-offset-0  overflow-hidden">
         <SelectValue placeholder="Sort By" />
       </SelectTrigger>
       <SelectContent>

@@ -3,7 +3,7 @@ import { CheckCheck } from "lucide-react";
 const CourseOverview = ({ course }) => {
   return (
     <>
-      <h3 className=" text-2xl">Course Description</h3>
+      <h3 className=" text-2xl">About Course</h3>
       <p className="mt-4">{course?.description}</p>
       <div className="bg-gray-50 space-y-6 p-8 rounded-md mt-8">
         <h4 className="text-2xl">What You will Learn?</h4>

@@ -84,12 +84,12 @@ const FilterCourse = () => {
     }
   };
   return (
-    <div className="hidden lg:block">
+    <div className="hidden lg:block rounded-2xl px-8 py-4 bg-[#f9f9fb] border border-[#fff]">
       <Accordion defaultValue={["categories"]} type="multiple">
         {/* Categories filter */}
         <AccordionItem value="categories">
           <AccordionTrigger className="py-3 text-sm text-gray-400 hover:text-gray-500">
-            <span className="font-medium text-gray-900">Categories</span>
+            <span className="font-medium text-gray-900">All Categories</span>
           </AccordionTrigger>
 
           <AccordionContent className="pt-6 animate-none">

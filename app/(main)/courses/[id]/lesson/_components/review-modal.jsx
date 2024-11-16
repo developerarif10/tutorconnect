@@ -1,6 +1,7 @@
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import * as z from "zod";
 // import axios from "axios";
+import { createTestmonial } from "@/app/actions/testimonial";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -41,20 +42,19 @@ export const ReviewModal = ({ open, setOpen, courseId, userId }) => {
 
   const onSubmit = async (values) => {
     try {
-      // const formData = new FormData();
-      // formData.append("content", values?.content);
-      // formData.append("courseId", values?.courseId);
-      // formData.append("rating"), values?.rating;
-      // formData.append("userId", values?.userId);
+      const formData = new FormData();
+      formData.append("content", values.review);
+      formData.append("courseId", courseId);
+      formData.append("rating", values.rating);
+      formData.append("user", userId);
 
-      // const testimonial = await createTestmonial(formData);
-
+      const testimonial = await createTestmonial(formData);
       toast.success("Review added");
       setOpen(false);
     } catch (error) {
+      console.log(error);
       toast.error("Something went wrong");
     }
-    // console.log(values);
   };
   return (
     <Dialog open={open} onOpenChange={setOpen}>

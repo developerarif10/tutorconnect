@@ -18,6 +18,7 @@ import { signOut, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { useEffect } from "react";
 import { Logo } from "./logo";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 export function MainNav({ items, children }) {
   const { data: session } = useSession();
@@ -109,17 +110,20 @@ export function MainNav({ items, children }) {
               )}
               <DropdownMenu>
                 {loggedInUser && (
-                  <DropdownMenuTrigger asChild>
-                    <div className="cursor-pointer">
-                      <Avatar>
-                        <AvatarImage
-                          src={loggedInUser?.profilePicture}
-                          alt="@shadcn"
-                        />
-                        <AvatarFallback>{firstLetter}</AvatarFallback>
-                      </Avatar>
-                    </div>
-                  </DropdownMenuTrigger>
+                  <>
+                    <DropdownMenuTrigger asChild>
+                      <div className="cursor-pointer">
+                        <Avatar>
+                          <AvatarImage
+                            src={loggedInUser?.profilePicture}
+                            alt="@shadcn"
+                          />
+                          <AvatarFallback>{firstLetter}</AvatarFallback>
+                        </Avatar>
+                      </div>
+                    </DropdownMenuTrigger>
+                    <ThemeSwitcher />
+                  </>
                 )}
 
                 <DropdownMenuContent
@@ -152,12 +156,7 @@ export function MainNav({ items, children }) {
                   >
                     <Link href="">Testimonials & Certificates</Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem
-                    className="cursor-pointer hover:bg-gray-100/80"
-                    asChild
-                  >
-                    <Link href="">Dark Mode</Link>
-                  </DropdownMenuItem>
+
                   {loginSession && (
                     <DropdownMenuItem
                       className="cursor-pointer hover:bg-gray-100/80"
