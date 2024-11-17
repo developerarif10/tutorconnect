@@ -3,10 +3,21 @@ import { BookOpen, UserRound } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { auth } from "@/auth";
 import { EnrollCourse } from "@/components/enroll-course";
 import { Button } from "@/components/ui/button";
+import { hasEnrollmentForCourse } from "@/queries/enrollments";
+import { getUserByEmail } from "@/queries/users";
 
-const CourseCard = ({ course }) => {
+const CourseCard = async ({ course }) => {
+  const session = await auth();
+
+  const loggedInUser = await getUserByEmail(session?.user?.email);
+
+  const hasEnrollment = await hasEnrollmentForCourse(
+    course?.id,
+    loggedInUser?.id
+  );
   return (
     <div className="group hover:shadow-sm transition overflow-hidden border rounded-3xl p-3 h-full">
       <Link key={course.id} href={`/courses/${course.id}`}>
@@ -48,7 +59,11 @@ const CourseCard = ({ course }) => {
         <p className="text-md md:text-sm font-bold text-[#1a73e8]">
           {formatPrice(course?.price)}
         </p>
-        <EnrollCourse asLink={true} courseId={course?.id} />
+        {hasEnrollment ? (
+          <span className="text-sm text-green-500">Enrolled</span>
+        ) : (
+          <EnrollCourse asLink={true} courseId={course?.id} />
+        )}
       </div>
       <div className="mt-4">
         <Link href={`/courses/${course.id}`}>

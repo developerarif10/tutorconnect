@@ -2,7 +2,6 @@
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { Button } from "./ui/button";
 
 const ThemeSwitcher = () => {
   const [mount, setMount] = useState(false);
@@ -11,15 +10,14 @@ const ThemeSwitcher = () => {
   useEffect(() => {
     setMount(true);
   }, []);
-  //   console.log(currentTheme);
   return mount ? (
-    <Button
+    <button
       onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
       type="button"
-      className="flex h-10 w-10 p-2 items-center justify-center rounded-md border focus:outline-none focus:ring-0 focus:ring-gray-200"
+      className="flex h-10 w-10 p-2 items-center justify-center border focus:outline-none rounded-full"
     >
       <Moon className="dark:hidden" /> <Sun className="hidden dark:block" />
-    </Button>
+    </button>
   ) : null;
 };
 export default ThemeSwitcher;
