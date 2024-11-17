@@ -29,14 +29,12 @@ const PersonalDetails = ({ userInfo }) => {
 
   const handleUpdate = async (event) => {
     event.preventDefault();
-    // console.log(infoState);
 
     try {
       await updateUserInfo(userInfo?.email, infoState);
       toast.success("User details updated successfully.");
     } catch (error) {
-      // console.error(error);
-      toast.error(`Error: ${error.message}`);
+      toast.error(error.message);
     }
   };
 

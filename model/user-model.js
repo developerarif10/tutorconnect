@@ -21,6 +21,11 @@ const userSchema = new Schema({
     required: false,
     type: String,
   },
+  url: {
+    required: false,
+    type: String,
+  },
+
   role: {
     required: true,
     type: String,

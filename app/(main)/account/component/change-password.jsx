@@ -13,6 +13,7 @@ const ChangePassword = ({ email }) => {
   const [passwordState, setPasswordState] = useState({
     oldPassword: "",
     newPassword: "",
+    confirmPassword: "",
   });
 
   function handleChange(event) {
@@ -22,9 +23,13 @@ const ChangePassword = ({ email }) => {
     setPasswordState({ ...passwordState, [key]: value });
   }
 
-  async function doPassowrdChange(event) {
+  async function doPasswordChange(event) {
     event.preventDefault();
-    // console.log(passwordState);
+
+    if (passwordState.newPassword !== passwordState.confirmPassword) {
+      toast.error("New passwords don't match!");
+      return;
+    }
 
     try {
       await changePassword(
@@ -33,17 +38,22 @@ const ChangePassword = ({ email }) => {
         passwordState?.newPassword
       );
 
-      toast.success(`Password changed successfully.`);
+      setPasswordState({
+        oldPassword: "",
+        newPassword: "",
+        confirmPassword: "",
+      });
+
+      toast.success(`Password changed successfully`);
     } catch (err) {
-      // console.error(err);
-      toast.error(`Error: ${err.message}`);
+      toast.error(err.message);
     }
   }
 
   return (
     <div>
       <h5 className="text-lg font-semibold mb-4">Change password :</h5>
-      <form onSubmit={doPassowrdChange}>
+      <form onSubmit={doPasswordChange}>
         <div className="grid grid-cols-1 gap-5">
           <div>
             <Label className="mb-2 block">Old password :</Label>
@@ -52,6 +62,7 @@ const ChangePassword = ({ email }) => {
               placeholder="Old password"
               id="oldPassword"
               name="oldPassword"
+              value={passwordState.oldPassword}
               onChange={handleChange}
               required
             />
@@ -63,6 +74,7 @@ const ChangePassword = ({ email }) => {
               placeholder="New password"
               id="newPassword"
               name="newPassword"
+              value={passwordState.newPassword}
               onChange={handleChange}
               required
             />
@@ -72,7 +84,11 @@ const ChangePassword = ({ email }) => {
             <Input
               type="password"
               placeholder="Re-type New password"
-              required=""
+              id="confirmPassword"
+              name="confirmPassword"
+              value={passwordState.confirmPassword}
+              onChange={handleChange}
+              required
             />
           </div>
         </div>

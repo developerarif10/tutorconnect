@@ -3,27 +3,8 @@ import { Input } from "./ui/input";
 
 export function SiteFooter({ className }) {
   return (
-    // <footer className={cn(className)}>
-    //   <div className="container flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0 ">
-    //     <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
-    //       <Logo />
-    //     </div>
-    //     <p className="text-sm">© 2024 Tutor Connect. All rights reserved.</p>
-    //     <p className="text-center text-sm leading-loose md:text-left">
-    //       Built by{" "}
-    //       <a
-    //         href="#"
-    //         rel="noreferrer"
-    //         className="font-medium underline underline-offset-4"
-    //       >
-    //         @developerarif
-    //       </a>
-    //     </p>
-    //   </div>
-    // </footer>
-
     <footer className={cn(className)}>
-      <div className="container px-5 py-24 mx-auto">
+      <div className="container text-[#f5f5f5] px-5 py-24 mx-auto border border-t-1">
         <div className="flex flex-wrap md:text-left text-center order-first">
           <div className="lg:w-1/4 md:w-1/2 w-full px-4">
             <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
