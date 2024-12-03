@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { formatPrice } from "@/lib/formatPrice";
 import {
   Award,
@@ -167,7 +168,7 @@ export default function SingleSidebarCourse({ course }) {
                       Label
                     </label>
                     <div className="relative flex rounded-lg shadow-sm">
-                      <input
+                      <Input
                         type="text"
                         id="hs-trailing-button-add-on-with-icon-and-button"
                         name="hs-trailing-button-add-on-with-icon-and-button"

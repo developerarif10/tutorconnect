@@ -18,6 +18,7 @@ const CourseCard = async ({ course }) => {
     course?.id,
     loggedInUser?.id
   );
+
   return (
     <div className="group hover:shadow-sm transition overflow-hidden border rounded-3xl p-3 h-full">
       <Link key={course.id} href={`/courses/${course.id}`}>
@@ -34,7 +35,7 @@ const CourseCard = async ({ course }) => {
             <div className="text-lg md:text-base mb-2 font-medium group-hover:text-sky-700 line-clamp-2">
               {course?.title}
             </div>
-            {course?.category?.title && (
+            {course?.category && (
               <span className="text-xs w-fit rounded-lg px-2.5 p-2 bg-[rgba(23,162,184,.08)] text-[#17a2b8] font-semibold">
                 {course?.category?.title}
               </span>

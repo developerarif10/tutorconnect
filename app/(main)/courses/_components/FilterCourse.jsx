@@ -1,14 +1,12 @@
 "use client";
-
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-
 import { Checkbox } from "@/components/ui/checkbox";
-
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 const PRICE_OPTIONS = [
@@ -16,99 +14,59 @@ const PRICE_OPTIONS = [
   { label: "Paid", value: "paid" },
 ];
 
-const CATEGORY_OPTIONS = [
-  {
-    id: 1,
-    label: "Design",
-    value: "design",
-  },
+const FilterCourse = ({ searchParams, CATEGORY_OPTIONS }) => {
+  const { replace } = useRouter();
+  const pathname = usePathname();
+  const initialSelectedCategories = searchParams.category
+    ? searchParams.category.split(",")
+    : [];
+  const [selectedCategories, setSelectedCategories] = useState(
+    initialSelectedCategories
+  );
 
-  {
-    id: 3,
-    label: "Development",
-    value: "development",
-  },
-  {
-    id: 4,
-    label: "Marketing",
-    value: "marketing",
-  },
-  {
-    id: 5,
-    label: "IT & Software",
-    value: "it-software",
-  },
-  {
-    id: 6,
-    label: "Personal Development",
-    value: "personal-development",
-  },
-  {
-    id: 7,
-    label: "Business",
-    value: "business",
-  },
-  {
-    id: 8,
-    label: "Photography",
-    value: "photography",
-  },
-  {
-    id: 9,
-    label: "Music",
-    value: "music",
-  },
-];
+  const handleCategoryChange = (id) => {
+    const newSelectedCategories = selectedCategories.includes(id)
+      ? selectedCategories.filter((cat) => cat !== id)
+      : [...selectedCategories, id];
 
-const FilterCourse = () => {
-  const [filter, setFilter] = useState({
-    categories: ["development"],
-    price: ["free"],
-    sort: "",
-  });
-
-  //   apply checkbox filter
-  const applyArrayFilter = ({ type, value }) => {
-    const isFilterApplied = filter[type].includes(value);
-
-    if (isFilterApplied) {
-      setFilter((prev) => ({
-        ...prev,
-        [type]: prev[type].filter((v) => v !== value),
-      }));
+    setSelectedCategories(newSelectedCategories);
+    const params = new URLSearchParams(searchParams);
+    // Update the URL with the selected category values
+    if (newSelectedCategories.length > 0) {
+      params.set(
+        "category",
+        newSelectedCategories
+          .map(
+            (catId) =>
+              CATEGORY_OPTIONS.find((option) => option._id === catId)?.value
+          )
+          .join(",")
+      );
     } else {
-      setFilter((prev) => ({
-        ...prev,
-        [type]: [...prev[type], value],
-      }));
+      params.delete("category");
     }
+    replace(`${pathname}?${params.toString()}`);
   };
+
   return (
-    <div className="hidden lg:block rounded-2xl px-8 py-4 bg-[#f9f9fb] border border-[#fff]">
+    <div className="hidden lg:block">
       <Accordion defaultValue={["categories"]} type="multiple">
-        {/* Categories filter */}
         <AccordionItem value="categories">
           <AccordionTrigger className="py-3 text-sm text-gray-400 hover:text-gray-500">
-            <span className="font-medium text-gray-900">All Categories</span>
+            <span className="font-medium text-gray-900">Categories</span>
           </AccordionTrigger>
 
           <AccordionContent className="pt-6 animate-none">
             <ul className="space-y-4">
-              {CATEGORY_OPTIONS.map((option, optionIdx) => (
-                <li key={option.value} className="flex items-center">
+              {CATEGORY_OPTIONS.map((option) => (
+                <li key={option._id} className="flex items-center">
                   <Checkbox
-                    type="checkbox"
-                    id={`category-${optionIdx}`}
-                    onCheckedChange={() => {
-                      applyArrayFilter({
-                        type: "categories",
-                        value: option.value,
-                      });
-                    }}
-                    checked={filter.categories.includes(option.value)}
+                    id={`category-${option.value}`}
+                    checked={selectedCategories.includes(option._id)}
+                    onCheckedChange={() => handleCategoryChange(option._id)}
                   />
                   <label
-                    htmlFor={`category-${optionIdx}`}
+                    htmlFor={`category-${option.value}`}
                     className="ml-3 text-sm text-gray-600 cursor-pointer"
                   >
                     {option.label}
@@ -124,7 +82,7 @@ const FilterCourse = () => {
             <span className="font-medium text-gray-900">Price</span>
           </AccordionTrigger>
 
-          <AccordionContent className="pt-6 animate-none">
+          {/* <AccordionContent className="pt-6 animate-none">
             <ul className="space-y-4">
               {PRICE_OPTIONS.map((option, optionIdx) => (
                 <li key={option.value} className="flex items-center">
@@ -148,7 +106,7 @@ const FilterCourse = () => {
                 </li>
               ))}
             </ul>
-          </AccordionContent>
+          </AccordionContent> */}
         </AccordionItem>
       </Accordion>
     </div>

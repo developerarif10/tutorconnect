@@ -70,7 +70,7 @@ export function SiteFooter({ className }) {
             <div className="flex xl:flex-nowrap md:flex-nowrap lg:flex-wrap flex-wrap justify-center items-end md:justify-start">
               <div className="relative w-40 sm:w-auto xl:mr-4 lg:mr-0 sm:mr-4 mr-2">
                 <label
-                  for="footer-field"
+                  htmlFor="footer-field"
                   className="leading-7 text-sm text-gray-600"
                 >
                   Placeholder
@@ -101,9 +101,9 @@ export function SiteFooter({ className }) {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
               viewBox="0 0 24 24"
             >
@@ -121,9 +121,9 @@ export function SiteFooter({ className }) {
             <a className="text-gray-500">
               <svg
                 fill="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 className="w-5 h-5"
                 viewBox="0 0 24 24"
               >
@@ -133,9 +133,9 @@ export function SiteFooter({ className }) {
             <a className="ml-3 text-gray-500">
               <svg
                 fill="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 className="w-5 h-5"
                 viewBox="0 0 24 24"
               >
@@ -146,9 +146,9 @@ export function SiteFooter({ className }) {
               <svg
                 fill="none"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 className="w-5 h-5"
                 viewBox="0 0 24 24"
               >
@@ -160,9 +160,9 @@ export function SiteFooter({ className }) {
               <svg
                 fill="currentColor"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="0"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="0"
                 className="w-5 h-5"
                 viewBox="0 0 24 24"
               >

@@ -1,5 +1,6 @@
 "use client";
 
+import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -53,7 +54,7 @@ const UploadProfilePic = () => {
   };
 
   return (
-    <input
+    <Input
       id="pro-img"
       name="profile-image"
       type="file"

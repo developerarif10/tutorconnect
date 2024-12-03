@@ -16,9 +16,20 @@ import dbConnect from "@/service/mongo";
 import { getEnrollmentsForCourse } from "./enrollments";
 import { getTestimonialsForCourse } from "./testimonials";
 
-export async function getCourseList() {
+export async function getCourseList(query) {
   await dbConnect();
-  const courses = await Course.find({ active: true })
+
+  const queryRegex = query ? new RegExp(query, "i") : undefined;
+
+  const filter = { active: true };
+  if (queryRegex) {
+    filter.$or = [
+      { title: { $regex: queryRegex } },
+      { description: { $regex: queryRegex } },
+    ];
+  }
+
+  const allCourses = await Course.find(filter)
     .select([
       "title",
       "subtitle",
@@ -31,6 +42,7 @@ export async function getCourseList() {
     .populate({
       path: "category",
       model: Category,
+      select: "name",
     })
     .populate({
       path: "instructor",
@@ -45,7 +57,8 @@ export async function getCourseList() {
       model: Module,
     })
     .lean();
-  return replaceMongoIdInArray(courses);
+
+  return replaceMongoIdInArray(allCourses);
 }
 
 export async function getCourseDetails(id) {
@@ -170,5 +183,23 @@ export async function create(courseData) {
     return JSON.parse(JSON.stringify(course));
   } catch (err) {
     throw new Error(err);
+  }
+}
+
+export async function getSearchedCourses(query) {
+  const queryRegex = new RegExp(query, "i");
+
+  try {
+    await dbConnect();
+    const courses = await Course.find({
+      $or: [
+        { title: { $regex: queryRegex } },
+        { description: { $regex: queryRegex } },
+      ],
+    }).lean();
+
+    return replaceMongoIdInArray(courses);
+  } catch (error) {
+    throw error;
   }
 }

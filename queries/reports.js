@@ -73,8 +73,8 @@ export async function createWatchReport(data) {
       );
     }
 
-    const moduleContent = await Module.findById(data.moduleId);
-    const lessonIdsToCheck = module.lessonIds;
+    const modules = await Module.findById(data.moduleId);
+    const lessonIdsToCheck = modules.lessonIds;
     const completedLessonsIds = report.totalCompletedLessons;
 
     const isModuleComplete = lessonIdsToCheck.every((lesson) =>
