@@ -47,11 +47,11 @@ const HomePage = async () => {
             Hey, Welcome
           </span>
           <h1 className="font-heading text-3xl font-bold sm:text-5xl md:text-6xl lg:text-7xl">
-            Learn Today, Lead Tomorrow.
+            Unlock Your Learning Potential
           </h1>
           <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
-            “You don’t understand anything until you learn it more than one
-            way.”
+            Explore diverse courses designed to inspire, educate, and empower
+            learners of all levels
           </p>
           <div className="flex items-center gap-3 flex-wrap justify-center">
             <Link
@@ -95,16 +95,19 @@ const HomePage = async () => {
               <Link
                 href={`/categories/${category.id}`}
                 key={category.id}
-                className="relative overflow-hidden rounded-lg border bg-background p-2 hover:scale-105 transition-all duration-500 ease-in-out"
+                className="relative overflow-hidden rounded-xl border bg-background p-2 hover:scale-105 transition-all duration-500 ease-in-out"
               >
-                <div className="flex  flex-col gap-4 items-center justify-between rounded-md p-6">
+                <div className="flex flex-col gap-4 text-left items-center justify-start rounded-md p-6">
                   <Image
                     src={`/assets/images/categories/${category.thumbnail}`}
                     alt={category.title}
-                    width={100}
-                    height={100}
+                    width={60}
+                    height={60}
                   />
-                  <h3 className="font-bold">{category.title}</h3>
+                  <div>
+                    <h3 className="font-bold">{category.title}</h3>
+                    <span className="">{category.sub_title}</span>
+                  </div>
                 </div>
               </Link>
             );
