@@ -19,27 +19,30 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export function LoginForm() {
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
 
   async function onSubmit(event) {
     event.preventDefault();
+    setIsLoading(true);
 
     try {
       const formData = new FormData(event.currentTarget);
       const response = await ceredntialLogin(formData);
 
       if (!!response.error) {
-        console.error(response.error);
+        // console.error(response.error);
         setError(response.error);
       } else {
         router.push("/courses");
       }
     } catch (e) {
       setError(e.message);
+    } finally {
+      setIsLoading(false);
     }
   }
-
   return (
     <Card className="mx-auto max-w-sm w-full">
       <CardHeader>
@@ -47,6 +50,9 @@ export function LoginForm() {
         <CardDescription>
           Enter your email below to login to your account
         </CardDescription>
+        {error && (
+          <p className="text-red-500 text-sm">Wrong Email or password</p>
+        )}
       </CardHeader>
       <CardContent>
         <form onSubmit={onSubmit}>
@@ -67,8 +73,8 @@ export function LoginForm() {
               </div>
               <Input id="password" name="password" type="password" required />
             </div>
-            <Button type="submit" className="w-full">
-              Login
+            <Button type="submit" className="w-full" disabled={isLoading}>
+              {isLoading ? "Loading..." : "Login"}
             </Button>
           </div>
         </form>

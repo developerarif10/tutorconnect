@@ -14,12 +14,16 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export function SignupForm({ role }) {
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   async function onSubmit(event) {
     event.preventDefault();
+
+    setIsLoading(true);
 
     try {
       const formData = new FormData(event.currentTarget);
@@ -46,9 +50,15 @@ export function SignupForm({ role }) {
         }),
       });
 
+      if (!response.ok) {
+        throw Error("Failed to submit the data. Please try again.");
+      }
+
       response.status === 201 && router.push("/login");
     } catch (e) {
       console.log(e.message);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -105,8 +115,8 @@ export function SignupForm({ role }) {
                 type="password"
               />
             </div>
-            <Button type="submit" className="w-full">
-              Create an account
+            <Button type="submit" className="w-full" disabled={isLoading}>
+              {isLoading ? "Loading..." : "Create an account"}
             </Button>
           </div>
         </form>
