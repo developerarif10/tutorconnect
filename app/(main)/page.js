@@ -1,4 +1,10 @@
 import { SectionTitle } from "@/components/section-title";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ArrowRightIcon } from "lucide-react";
@@ -24,7 +30,7 @@ const HomePage = async () => {
             <span className="rounded-2xl bg-muted px-4 py-1.5 text-sm w-fit font-medium border shadow-lg">
               Howdy
             </span>
-            <h1 className="font-heading font-bold md:text-[3.2rem] leading-tight">
+            <h1 className="font-heading dark:text-black font-bold md:text-[3.2rem] leading-tight">
               Unlock Your Learning <br /> Potential
             </h1>
             <p className="leading-normal text-muted-foreground sm:leading-6">
@@ -34,7 +40,9 @@ const HomePage = async () => {
             <div className="flex gap-3 flex-wrap mt-4">
               <Link
                 href="/courses"
-                className={cn(buttonVariants({ size: "lg" }))}
+                className={cn(
+                  buttonVariants({ variant: "outline", size: "lg" })
+                )}
               >
                 Explore Now
               </Link>
@@ -77,15 +85,12 @@ const HomePage = async () => {
         </div>
       </section>
       {/* Categories Section */}
-      <section
-        id="categories"
-        className="container space-y-6  py-8  md:py-12 lg:py-24"
-      >
+      <section id="categories" className="container space-y-6 py-8 ">
         <div className="flex items-center justify-between">
           <SectionTitle>Categories</SectionTitle>
 
           <Link
-            href={""}
+            href="#"
             className=" text-sm font-medium  hover:opacity-80 flex items-center gap-1"
           >
             Browse All <ArrowRightIcon className="h-4 w-4" />
@@ -99,7 +104,7 @@ const HomePage = async () => {
                 key={category.id}
                 className="relative overflow-hidden rounded-xl border bg-background p-2 hover:scale-105 transition-all duration-500 ease-in-out"
               >
-                <div className="flex flex-col gap-4 text-left items-center justify-start rounded-md p-6">
+                <div className="flex flex-col gap-4 text-center items-center justify-start rounded-md p-6">
                   <Image
                     src={`/assets/images/categories/${category.thumbnail}`}
                     alt={category.title}
@@ -118,7 +123,7 @@ const HomePage = async () => {
       </section>
 
       {/* Courses */}
-      <section id="courses" className="container space-y-6 md:py-12 lg:py-24">
+      <section id="courses" className="container space-y-6 md:py-12">
         <div className="flex items-center justify-between">
           <SectionTitle>Courses</SectionTitle>
           <Link
@@ -147,6 +152,7 @@ const HomePage = async () => {
         </div>
       </section>
 
+      {/* card section */}
       <section>
         <div className=" py-12">
           <div className="lg:w-5/6 flex flex-col py-12 px-24 bg-slate-500 sm:flex-row sm:items-center items-start mx-auto">
@@ -161,6 +167,99 @@ const HomePage = async () => {
             <Button className="flex-shrink-0 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-10 sm:mt-0">
               Become an Instructor!
             </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Accordion section */}
+      <section id="accordion" className="container space-y-6 py-6 md:py-12">
+        <h1 className="text-3xl">
+          Frequently Asked Questions: We're Here to Help
+        </h1>
+        <div className="md:container md:flex gap-4 sm:p-4 justify-center">
+          <div className="w-full">
+            <Accordion
+              type="single"
+              collapsible
+              className="w-full bg-[#e3f2fd] rounded-xl p-4"
+            >
+              <AccordionItem value="item-1">
+                <AccordionTrigger>
+                  What types of courses do you offer?
+                </AccordionTrigger>
+                <AccordionContent>
+                  We offer a wide range of courses across various fields such as
+                  Business & Management, Technology & Coding, Design & Creative
+                  Arts, and Finance & Accounting. Our courses are designed for
+                  learners at different levels, from beginners to advanced
+                  professionals.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-2">
+                <AccordionTrigger>
+                  How do I enroll in a course?
+                </AccordionTrigger>
+                <AccordionContent>
+                  Enrolling in a course is simple! Just sign up for an account,
+                  browse our course catalog, and select the course you’re
+                  interested in. Once you’ve completed the payment process,
+                  you’ll gain immediate access to the course materials.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-3">
+                <AccordionTrigger>
+                  Are the courses self-paced or instructor-led?
+                </AccordionTrigger>
+                <AccordionContent>
+                  Our platform offers both self-paced courses and instructor-led
+                  courses. Self-paced courses allow you to learn at your own
+                  speed, while instructor-led courses provide scheduled lessons,
+                  live sessions, and personal feedback.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </div>
+          <div className="w-full">
+            <Accordion
+              type="single"
+              collapsible
+              className="w-full bg-[#e3f2fd] rounded-xl p-4"
+            >
+              <AccordionItem value="item-1">
+                <AccordionTrigger>
+                  What types of courses do you offer?
+                </AccordionTrigger>
+                <AccordionContent>
+                  We offer a wide range of courses across various fields such as
+                  Business & Management, Technology & Coding, Design & Creative
+                  Arts, and Finance & Accounting. Our courses are designed for
+                  learners at different levels, from beginners to advanced
+                  professionals.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-2">
+                <AccordionTrigger>
+                  How do I enroll in a course?
+                </AccordionTrigger>
+                <AccordionContent>
+                  Enrolling in a course is simple! Just sign up for an account,
+                  browse our course catalog, and select the course you’re
+                  interested in. Once you’ve completed the payment process,
+                  you’ll gain immediate access to the course materials.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-3">
+                <AccordionTrigger>
+                  Are the courses self-paced or instructor-led?
+                </AccordionTrigger>
+                <AccordionContent>
+                  Our platform offers both self-paced courses and instructor-led
+                  courses. Self-paced courses allow you to learn at your own
+                  speed, while instructor-led courses provide scheduled lessons,
+                  live sessions, and personal feedback.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         </div>
       </section>

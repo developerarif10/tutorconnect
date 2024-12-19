@@ -16,6 +16,7 @@ import { getCourseDetails } from "@/queries/courses";
 import { replaceMongoIdInArray } from "@/lib/convertData";
 
 import { getAllQuizSets } from "@/queries/quizzes";
+import { LearningForm } from "./_components/learning-form";
 
 const EditCourse = async ({ params: { courseId } }) => {
   const course = await getCourseDetails(courseId);
@@ -69,6 +70,10 @@ const EditCourse = async ({ params: { courseId } }) => {
             />
             <DescriptionForm
               initialData={{ description: course?.description }}
+              courseId={courseId}
+            />
+            <LearningForm
+              initialData={{ learning: course?.learning }}
               courseId={courseId}
             />
             <ImageForm
