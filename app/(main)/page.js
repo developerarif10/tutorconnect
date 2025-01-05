@@ -5,7 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ArrowRightIcon } from "lucide-react";
 import Image from "next/image";
@@ -154,8 +154,15 @@ const HomePage = async () => {
 
       {/* card section */}
       <section>
-        <div className=" py-12">
-          <div className="lg:w-5/6 flex flex-col py-12 px-24 bg-slate-500 sm:flex-row sm:items-center items-start mx-auto">
+        <div className="py-12">
+          <div
+            className="lg:w-5/6 flex flex-col py-12 px-24 sm:flex-row sm:items-center items-start mx-auto "
+            style={{
+              backgroundImage: 'url("./assets/images/coverbg.svg")',
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+            }}
+          >
             <div className="text-white">
               <h2 className="text-3xl">Become an Instructor!</h2>
               <p className="flex-grow sm:pr-16 ">
@@ -164,9 +171,12 @@ const HomePage = async () => {
                 ten who diminution astonished.
               </p>
             </div>
-            <Button className="flex-shrink-0 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-10 sm:mt-0">
-              Become an Instructor!
-            </Button>
+
+            <button className="flex-shrink-0 text-white bg-indigo-500 py-2 px-8 text-lg mt-10 sm:mt-0 rounded-3xl border-2 border-[#9748FF] shadow-[inset_0px_-2px_0px_1px_#9748FF] group hover:bg-[#9748FF] transition duration-300 ease-in-out">
+              <span className="font-medium group-hover:text-white">
+                Become an Instructor
+              </span>
+            </button>
           </div>
         </div>
       </section>
