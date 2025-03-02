@@ -12,7 +12,7 @@ import Link from "next/link";
 import { getCategories } from "@/queries/categories";
 import { getCourseList } from "@/queries/courses";
 
-import Hero from "@/components/hero";
+import Hero from "@/components/hero-section/hero";
 import { InfiniteMovingCardsPage } from "@/components/ui/testimonial-cards";
 import { getOverallReviews } from "@/queries/testimonials";
 import CourseCard from "./courses/_components/CourseCard";
