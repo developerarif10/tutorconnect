@@ -1,7 +1,9 @@
+"use client";
 import { useLockBody } from "@/hooks/use-lock-body";
 import { cn } from "@/lib/utils";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, buttonVariants } from "./ui/button";
 import {
   DropdownMenu,
@@ -10,75 +12,85 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
-import { useSession } from "next-auth/react";
-import { useEffect } from "react";
-
-import { redirect } from "next/navigation";
-
-export function MobileNav({ items, children }) {
+export function MobileNav({ items, children, onClose }) {
   useLockBody();
 
   const { data: session } = useSession();
-
-  if (session?.error === "RefreshAccessTokenError") {
-    redirect("/login");
-  }
-
   const [loginSession, setLoginSession] = useState(null);
 
   useEffect(() => {
-    // console.log("test");
     setLoginSession(session);
   }, [session]);
 
   return (
-    <div
-      className={cn(
-        "fixed inset-0 top-16 z-30 grid h-[calc(100vh-4rem)] grid-flow-row auto-rows-max overflow-auto p-6 pb-32 shadow-md animate-in slide-in-from-bottom-80 lg:hidden"
-      )}
-    >
-      <div className="relative z-20 grid gap-6 rounded-md bg-popover p-4 text-popover-foreground shadow-md border">
-        <nav className="grid grid-flow-row auto-rows-max text-sm">
-          {items.map((item, index) => (
-            <Link
-              key={index}
-              href={item.disabled ? "#" : item.href}
-              className={cn(
-                "flex w-full items-center rounded-md p-2 text-sm font-medium hover:underline",
-                item.disabled && "cursor-not-allowed opacity-60"
-              )}
-            >
-              {item.title}
-            </Link>
-          ))}
-        </nav>
-        {!loginSession && (
-          <div className="items-center gap-3 flex lg:hidden">
-            <Link
-              href="/login"
-              className={cn(buttonVariants({ size: "sm" }), "px-4")}
-            >
-              Login
-            </Link>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm">
-                  Register
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="center" className="w-56 mt-4">
-                <DropdownMenuItem className="cursor-pointer">
-                  <Link href="/register/student">Student</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer">
-                  <Link href="/register/instructor">Instructor</Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
+    <>
+      <div
+        className="fixed inset-0 top-[73px] z-40 bg-black/50"
+        onClick={onClose}
+      />
+      <div
+        className={cn(
+          "fixed inset-x-0 top-[73px] z-50 h-[calc(100vh-73px)] overflow-y-auto bg-white dark:bg-slate-800 pb-safe-area-inset-bottom"
         )}
-        {children}
+      >
+        <div className="relative grid gap-6 p-6">
+          <nav className="grid grid-flow-row auto-rows-max text-sm">
+            {items.map((item, index) => (
+              <Link
+                key={index}
+                href={item.disabled ? "#" : item.href}
+                className={cn(
+                  "flex w-full items-center rounded-md p-2 text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-700/50",
+                  item.disabled && "cursor-not-allowed opacity-60"
+                )}
+                onClick={onClose}
+              >
+                {item.title}
+              </Link>
+            ))}
+          </nav>
+          {!loginSession && (
+            <div className="grid gap-2">
+              <Link
+                href="/login"
+                className={cn(buttonVariants({ size: "sm" }), "w-full")}
+                onClick={onClose}
+              >
+                Log In
+              </Link>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" size="sm" className="w-full">
+                    Sign Up
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  align="end"
+                  className="w-56 mt-2 bg-white dark:bg-slate-800"
+                >
+                  <DropdownMenuItem
+                    className="cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700/50"
+                    onClick={onClose}
+                  >
+                    <Link href="/register/student" className="w-full">
+                      Student
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    className="cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700/50"
+                    onClick={onClose}
+                  >
+                    <Link href="/register/instructor" className="w-full">
+                      Instructor
+                    </Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          )}
+          {children}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

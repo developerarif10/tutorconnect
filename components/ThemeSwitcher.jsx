@@ -1,23 +1,25 @@
 "use client";
-import { Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
 
-const ThemeSwitcher = () => {
-  const [mount, setMount] = useState(false);
-  const { systemTheme, theme, setTheme } = useTheme();
-  const currentTheme = theme === "system" ? systemTheme : theme;
-  useEffect(() => {
-    setMount(true);
-  }, []);
-  return mount ? (
-    <button
-      onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
-      type="button"
-      className="flex h-10 w-10 p-2 items-center justify-center border focus:outline-none rounded-full"
+import { Button } from "@/components/ui/button";
+import { MoonIcon, SunIcon } from "lucide-react";
+import { useTheme } from "next-themes";
+
+export default function ThemeSwitcher() {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    <Button
+      variant="ghost"
+      size="icon"
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      className="rounded-full ml-2"
     >
-      <Moon className="dark:hidden" /> <Sun className="hidden dark:block" />
-    </button>
-  ) : null;
-};
-export default ThemeSwitcher;
+      {theme === "dark" ? (
+        <SunIcon className="h-5 w-5 text-yellow-400" />
+      ) : (
+        <MoonIcon className="h-5 w-5 text-slate-700" />
+      )}
+      <span className="sr-only">Toggle theme</span>
+    </Button>
+  );
+}

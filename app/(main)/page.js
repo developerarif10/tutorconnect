@@ -5,8 +5,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { ArrowRightIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,6 +12,7 @@ import Link from "next/link";
 import { getCategories } from "@/queries/categories";
 import { getCourseList } from "@/queries/courses";
 
+import Hero from "@/components/hero";
 import { InfiniteMovingCardsPage } from "@/components/ui/testimonial-cards";
 import { getOverallReviews } from "@/queries/testimonials";
 import CourseCard from "./courses/_components/CourseCard";
@@ -24,66 +23,7 @@ const HomePage = async () => {
   const testimonials = await getOverallReviews();
   return (
     <>
-      <section className="space-y-6 pt-6 md:pt-10 grainy">
-        <div className="container space-y-24 flex flex-col max-w-[74rem] md:flex-row gap-4 relative isolate">
-          <div className="flex flex-col justify-center">
-            <span className="rounded-2xl bg-muted px-4 py-1.5 text-sm w-fit font-medium border shadow-lg">
-              Howdy
-            </span>
-            <h1 className="font-heading dark:text-black font-bold md:text-[3.2rem] leading-tight">
-              Unlock Your Learning <br /> Potential
-            </h1>
-            <p className="leading-normal text-muted-foreground sm:leading-6">
-              Explore diverse courses designed to inspire, educate, and empower
-              learners of all levels
-            </p>
-            <div className="flex gap-3 flex-wrap mt-4">
-              <Link
-                href="/courses"
-                className={cn(
-                  buttonVariants({ variant: "outline", size: "lg" })
-                )}
-              >
-                Explore Now
-              </Link>
-              <Link
-                href="/register/instructor"
-                className={cn(
-                  buttonVariants({
-                    variant: "outline",
-                    size: "lg",
-                  })
-                )}
-              >
-                Become An Instructor
-              </Link>
-            </div>
-          </div>
-          <div className="relative">
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-            >
-              <div
-                className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(70%-30rem)] sm:w-[72.1875rem]"
-                style={{
-                  clipPath:
-                    "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-                }}
-              />
-            </div>
-            <div className="relative w-full h-full flex lg:justify-end">
-              <Image
-                src="/assets/images/hero_man_withbg.webp"
-                alt="Hero Image"
-                width={700}
-                height={700}
-                objectFit="cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      <Hero />
       {/* Categories Section */}
       <section id="categories" className="container space-y-6 py-8 ">
         <div className="flex items-center justify-between">
