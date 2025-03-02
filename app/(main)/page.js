@@ -1,17 +1,11 @@
 import { SectionTitle } from "@/components/section-title";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { ArrowRightIcon } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 
-import { getCategories } from "@/queries/categories";
 import { getCourseList } from "@/queries/courses";
 
+import Categories from "@/components/categories-section";
+import { FAQSection } from "@/components/faq-section";
 import Hero from "@/components/hero-section/hero";
 import { InfiniteMovingCardsPage } from "@/components/ui/testimonial-cards";
 import { getOverallReviews } from "@/queries/testimonials";
@@ -19,48 +13,14 @@ import CourseCard from "./courses/_components/CourseCard";
 
 const HomePage = async () => {
   const courses = await getCourseList();
-  const categories = await getCategories();
+  // const categories = await getCategories();
   const testimonials = await getOverallReviews();
   return (
     <>
+      {/* --- Hero section code --- */}
       <Hero />
-      {/* Categories Section */}
-      <section id="categories" className="container space-y-6 py-8 ">
-        <div className="flex items-center justify-between">
-          <SectionTitle>Categories</SectionTitle>
-
-          <Link
-            href="#"
-            className=" text-sm font-medium  hover:opacity-80 flex items-center gap-1"
-          >
-            Browse All <ArrowRightIcon className="h-4 w-4" />
-          </Link>
-        </div>
-        <div className="mx-auto grid justify-center gap-4 grid-cols-2  md:grid-cols-3 2xl:grid-cols-4">
-          {categories.map((category) => {
-            return (
-              <Link
-                href={`/categories/${category.id}`}
-                key={category.id}
-                className="relative overflow-hidden rounded-xl border bg-background p-2 hover:scale-105 transition-all duration-500 ease-in-out"
-              >
-                <div className="flex flex-col gap-4 text-center items-center justify-start rounded-md p-6">
-                  <Image
-                    src={`/assets/images/categories/${category.thumbnail}`}
-                    alt={category.title}
-                    width={60}
-                    height={60}
-                  />
-                  <div>
-                    <h3 className="font-bold">{category.title}</h3>
-                    <span className="">{category.sub_title}</span>
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-      </section>
+      {/* --- Category section --- */}
+      <Categories />
 
       {/* Courses */}
       <section id="courses" className="container space-y-6 md:py-12">
@@ -122,7 +82,7 @@ const HomePage = async () => {
       </section>
 
       {/* Accordion section */}
-      <section id="accordion" className="container space-y-6 py-6 md:py-12">
+      {/* <section id="accordion" className="container space-y-6 py-6 md:py-12">
         <h1 className="text-3xl">
           Frequently Asked Questions: We're Here to Help
         </h1>
@@ -212,7 +172,8 @@ const HomePage = async () => {
             </Accordion>
           </div>
         </div>
-      </section>
+      </section> */}
+      <FAQSection />
     </>
   );
 };

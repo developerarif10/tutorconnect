@@ -1,168 +1,216 @@
-import { cn } from "@/lib/utils";
+"use client";
+
+import {
+  ArrowRight,
+  CheckCircle,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Mail,
+  MapPin,
+  Phone,
+  Twitter,
+  Youtube,
+} from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
 import { Logo } from "./logo";
+import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 
-export function SiteFooter({ className }) {
+export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    // Add your newsletter subscription logic here
+    setSubscribed(true);
+    setEmail("");
+    setTimeout(() => setSubscribed(false), 3000);
+  };
+
   return (
-    <footer className={cn(className)}>
-      <div className="container text-[#f5f5f5] px-5 py-24 mx-auto border border-t-1">
-        <div className="flex flex-wrap md:text-left text-center order-first">
-          <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-            <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-              CATEGORIES
-            </h2>
-            <nav className="list-none mb-10">
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">First Link</a>
-              </li>
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">Second Link</a>
-              </li>
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">Third Link</a>
-              </li>
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
-              </li>
-            </nav>
-          </div>
-          <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-            <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-              CATEGORIES
-            </h2>
-            <nav className="list-none mb-10">
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">First Link</a>
-              </li>
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">Second Link</a>
-              </li>
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">Third Link</a>
-              </li>
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
-              </li>
-            </nav>
-          </div>
-          <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-            <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-              CATEGORIES
-            </h2>
-            <nav className="list-none mb-10">
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">First Link</a>
-              </li>
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">Second Link</a>
-              </li>
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">Third Link</a>
-              </li>
-              <li>
-                <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
-              </li>
-            </nav>
-          </div>
-          <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-            <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">
-              SUBSCRIBE
-            </h2>
-            <div className="flex xl:flex-nowrap md:flex-nowrap lg:flex-wrap flex-wrap justify-center items-end md:justify-start">
-              <div className="relative w-40 sm:w-auto xl:mr-4 lg:mr-0 sm:mr-4 mr-2">
-                <label
-                  htmlFor="footer-field"
-                  className="leading-7 text-sm text-gray-600"
-                >
-                  Placeholder
-                </label>
-                <Input
-                  type="text"
-                  id="footer-field"
-                  name="footer-field"
-                  className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                />
-              </div>
-              <button className="lg:mt-2 xl:mt-0 flex-shrink-0 inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
-                Button
-              </button>
-            </div>
-            <p className="text-gray-500 text-sm mt-2 md:text-left text-center">
-              Bitters chicharrones fanny pack
-              <br className="lg:block hidden" />
-              waistcoat green juice
+    <footer className="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 gap-8 py-12 md:grid-cols-2 lg:grid-cols-4 lg:gap-12">
+          {/* Company Info */}
+          <div className="space-y-6">
+            <Logo />
+            <p className="text-sm text-slate-600 dark:text-slate-400 max-w-sm">
+              Empowering learners worldwide with quality education. Join our
+              community of over 50,000+ students and expert instructors.
             </p>
+            <div className="flex gap-4">
+              <Link
+                href="#"
+                className="text-slate-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
+              >
+                <Facebook className="h-5 w-5" />
+              </Link>
+              <Link
+                href="#"
+                className="text-slate-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
+              >
+                <Twitter className="h-5 w-5" />
+              </Link>
+              <Link
+                href="#"
+                className="text-slate-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
+              >
+                <Instagram className="h-5 w-5" />
+              </Link>
+              <Link
+                href="#"
+                className="text-slate-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
+              >
+                <Linkedin className="h-5 w-5" />
+              </Link>
+              <Link
+                href="#"
+                className="text-slate-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
+              >
+                <Youtube className="h-5 w-5" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">
+              Quick Links
+            </h3>
+            <ul className="space-y-3">
+              {[
+                { text: "About Us", href: "/about" },
+                { text: "Our Courses", href: "/courses" },
+                { text: "Become an Instructor", href: "/teach" },
+                { text: "Career Guide", href: "/career" },
+                { text: "Student Success Stories", href: "/success-stories" },
+              ].map((link, index) => (
+                <li key={index}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-slate-600 dark:text-slate-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors flex items-center gap-1 group"
+                  >
+                    <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+                    {link.text}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Support */}
+          <div>
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">
+              Support
+            </h3>
+            <ul className="space-y-3">
+              {[
+                { text: "Help Center", href: "/help" },
+                { text: "Terms of Service", href: "/terms" },
+                { text: "Privacy Policy", href: "/privacy" },
+                { text: "Cookie Policy", href: "/cookies" },
+                { text: "Contact Us", href: "/contact" },
+              ].map((link, index) => (
+                <li key={index}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-slate-600 dark:text-slate-400 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors flex items-center gap-1 group"
+                  >
+                    <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+                    {link.text}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Newsletter */}
+          <div>
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">
+              Stay Updated
+            </h3>
+            <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">
+              Subscribe to our newsletter for the latest updates and exclusive
+              offers.
+            </p>
+            <form onSubmit={handleSubscribe} className="space-y-2">
+              <div className="relative">
+                <Input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full pl-4 pr-10 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm"
+                  required
+                />
+                <Button
+                  type="submit"
+                  className="absolute right-1 top-1 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white rounded-md px-3 py-1 text-sm"
+                >
+                  {subscribed ? (
+                    <CheckCircle className="h-4 w-4" />
+                  ) : (
+                    "Subscribe"
+                  )}
+                </Button>
+              </div>
+            </form>
+
+            {/* Contact Info */}
+            <div className="mt-6 space-y-3">
+              <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+                <Mail className="h-4 w-4 text-cyan-500" />
+                support@tutorconnect.com
+              </div>
+              <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+                <Phone className="h-4 w-4 text-cyan-500" />
+                +1 (555) 123-4567
+              </div>
+              <div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+                <MapPin className="h-4 w-4 text-cyan-500" />
+                123 Learning Street, Education City, 12345
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="bg-gray-100">
-        <div className="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
-          <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-            <Logo />
-          </a>
-          <p className="text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4">
-            © 2024 Tutor Connect. All rights reserved.
-            <a href="#" className="text-gray-600 ml-1" target="_blank">
-              @developerarif
-            </a>
-          </p>
-          <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
-            <a className="text-gray-500">
-              <svg
-                fill="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                className="w-5 h-5"
-                viewBox="0 0 24 24"
+
+        {/* Bottom Bar */}
+        <div className="border-t border-slate-200 dark:border-slate-800 py-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-slate-600 dark:text-slate-400 text-center md:text-left">
+              © {new Date().getFullYear()} TutorConnect. All rights reserved.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4 text-sm text-slate-600 dark:text-slate-400">
+              <Link
+                href="/accessibility"
+                className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
               >
-                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-              </svg>
-            </a>
-            <a className="ml-3 text-gray-500">
-              <svg
-                fill="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                className="w-5 h-5"
-                viewBox="0 0 24 24"
+                Accessibility
+              </Link>
+              <Link
+                href="/sitemap"
+                className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
               >
-                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
-              </svg>
-            </a>
-            <a className="ml-3 text-gray-500">
-              <svg
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                className="w-5 h-5"
-                viewBox="0 0 24 24"
+                Sitemap
+              </Link>
+              <Link
+                href="/security"
+                className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
               >
-                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
-              </svg>
-            </a>
-            <a className="ml-3 text-gray-500">
-              <svg
-                fill="currentColor"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="0"
-                className="w-5 h-5"
-                viewBox="0 0 24 24"
+                Security
+              </Link>
+              <Link
+                href="/responsible-disclosure"
+                className="hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
               >
-                <path
-                  stroke="none"
-                  d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"
-                ></path>
-                <circle cx="4" cy="4" r="2" stroke="none"></circle>
-              </svg>
-            </a>
-          </span>
+                Responsible Disclosure
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
