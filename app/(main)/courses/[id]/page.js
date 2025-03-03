@@ -1,5 +1,4 @@
 import { auth } from "@/auth";
-import SingleSidebarCourse from "../_components/SingleSidebarCourse";
 import CourseDetails from "./_components/CourseDetails";
 import CourseDetailsIntro from "./_components/CourseDetailsIntro";
 import Testimonials from "./_components/Testimonials";
@@ -26,7 +25,7 @@ const SingleCoursePage = async ({ params: { id } }) => {
       <CourseDetailsIntro course={course} />
 
       <div className="container flex ">
-        <div className={!hasEnrollment ? "lg:w-4/5" : "w-full"}>
+        <div>
           <CourseDetails course={course} />
           {course?.testimonials > 0 && (
             <Testimonials
@@ -35,14 +34,6 @@ const SingleCoursePage = async ({ params: { id } }) => {
           )}
           {/*<RelatedCourses />*/}
         </div>
-        {!hasEnrollment && (
-          <div className="lg:w-1/2 lg:h-auto ">
-            <SingleSidebarCourse course={course} />
-          </div>
-        )}
-      </div>
-      <div className="container my-10">
-        <hr />
       </div>
     </section>
   );

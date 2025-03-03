@@ -58,7 +58,7 @@ const HomePage = async () => {
 
       <div className="py-12">
         <div
-          className="lg:w-5/6 flex flex-col py-12 px-24 sm:flex-row sm:items-center items-start mx-auto "
+          className="lg:w-5/6 flex flex-col py-12 px-24 sm:flex-row sm:items-center items-start mx-auto"
           style={{
             backgroundImage: 'url("./assets/images/coverbg.svg")',
             backgroundRepeat: "no-repeat",

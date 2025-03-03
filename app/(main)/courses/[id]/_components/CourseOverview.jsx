@@ -1,25 +1,29 @@
-import { CheckCheck } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 
 const CourseOverview = ({ course }) => {
   return (
-    <>
-      <h3 className=" text-2xl">About Course</h3>
-      <p className="mt-4">{course?.description}</p>
-      <div className="bg-gray-50 space-y-6 p-8 rounded-md mt-8">
-        <h4 className="text-2xl">What You will Learn?</h4>
-        <ul className="grid sm:grid-cols-2 grid-cols-1 gap-6">
-          {course?.learning &&
-            course?.learning.map((learning) => (
-              <li className="flex space-x-3" key={learning.id}>
-                <div className="flex-none relative top-1">
-                  <CheckCheck />
-                </div>
-                <div className="flex-1">{learning}</div>
+    <div className="py-6 space-y-8">
+      <div>
+        <h2 className="text-xl font-semibold mb-4">About Course</h2>
+        <p className="text-slate-600 leading-relaxed">
+          {course?.description || "No description available."}
+        </p>
+      </div>
+
+      {course?.learning && course.learning.length > 0 && (
+        <div>
+          <h2 className="text-xl font-semibold mb-6">What will you Learn?</h2>
+          <ul className="grid sm:grid-cols-2 gap-4">
+            {course.learning.map((item, index) => (
+              <li key={index} className="flex items-start gap-3">
+                <CheckCircle className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" />
+                <span className="text-slate-600">{item}</span>
               </li>
             ))}
-        </ul>
-      </div>
-    </>
+          </ul>
+        </div>
+      )}
+    </div>
   );
 };
 
