@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { Quote, Star } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
@@ -13,11 +14,12 @@ export const InfiniteMovingCards = ({
 }) => {
   const containerRef = React.useRef(null);
   const scrollerRef = React.useRef(null);
+  const [start, setStart] = useState(false);
 
   useEffect(() => {
     addAnimation();
   }, []);
-  const [start, setStart] = useState(false);
+
   function addAnimation() {
     if (containerRef.current && scrollerRef.current) {
       const scrollerContent = Array.from(scrollerRef.current.children);
@@ -34,6 +36,7 @@ export const InfiniteMovingCards = ({
       setStart(true);
     }
   }
+
   const getDirection = () => {
     if (containerRef.current) {
       if (direction === "left") {
@@ -49,6 +52,7 @@ export const InfiniteMovingCards = ({
       }
     }
   };
+
   const getSpeed = () => {
     if (containerRef.current) {
       if (speed === "fast") {
@@ -60,57 +64,81 @@ export const InfiniteMovingCards = ({
       }
     }
   };
+
   return (
     <div
       ref={containerRef}
       className={cn(
-        "scroller relative z-20  max-w-7xl overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
+        "scroller relative z-20 max-w-7xl overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
         className
       )}
     >
       <ul
         ref={scrollerRef}
         className={cn(
-          " flex min-w-full shrink-0 gap-4 py-4 w-max flex-nowrap",
-          start && "animate-scroll ",
+          "flex min-w-full shrink-0 gap-6 py-4 w-max flex-nowrap",
+          start && "animate-scroll",
           pauseOnHover && "hover:[animation-play-state:paused]"
         )}
       >
         {items.map((item, idx) => (
           <li
-            className="w-[350px] max-w-full relative rounded-2xl border flex-shrink-0 border-slate-700 px-8 py-6 md:w-[450px]"
-            style={{
-              background:
-                "linear-gradient(180deg, var(--slate-800), var(--slate-900)",
-            }}
             key={item.name}
+            className="group w-[300px] md:w-[400px] relative flex-shrink-0"
           >
-            <blockquote>
-              <div
-                aria-hidden="true"
-                className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
-              ></div>
-              <div className="relative z-20 mb-6 gap-2 flex flex-row items-center">
-                <Image
-                  className="rounded-full"
-                  width="32"
-                  height="32"
-                  alt="testmonial_Image"
-                  src={item.img}
-                />
-                <div className="flex flex-col">
-                  <figcaption className="text-sm leading-[1.6] text-gray-700 font-normal">
-                    {item.name}
-                  </figcaption>
-                  <p className="text-sm leading-[1.6 text-gray-700 font-normal">
-                    {item.title}
-                  </p>
+            <div className="h-full relative bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm transition-all duration-300 group-hover:shadow-lg">
+              {/* Quote Icon */}
+              <div className="absolute -top-3 -right-3">
+                <div className="bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full p-2 shadow-lg">
+                  <Quote className="w-3 h-3 text-white" />
                 </div>
               </div>
-              <span className="relative z-20 text-sm leading-[1.6] text-black font-normal">
-                {item.quote}
-              </span>
-            </blockquote>
+
+              {/* Content */}
+              <div className="space-y-4">
+                {/* Rating */}
+                <div className="flex justify-between items-center">
+                  <div className="flex gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`w-4 h-4 ${"text-yellow-400 fill-yellow-400"}`}
+                      />
+                    ))}
+                  </div>
+                  <span className="text-xs text-slate-500 dark:text-slate-400">
+                    {item.date}
+                  </span>
+                </div>
+
+                {/* Quote */}
+                <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-4">
+                  {item.quote}
+                </p>
+
+                {/* User Info */}
+                <div className="flex items-center gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+                  <div className="relative">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full blur opacity-0 group-hover:opacity-20 transition-opacity" />
+                    <Image
+                      className="relative rounded-full object-cover border-2 border-white dark:border-slate-800"
+                      width="40"
+                      height="40"
+                      alt={`${item.name}'s testimonial`}
+                      src={item.img || "/placeholder.svg"}
+                    />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-sm text-slate-900 dark:text-white">
+                      {item.name}
+                    </h4>
+                    <p className="text-xs text-slate-600 dark:text-slate-400">
+                      {item.title}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </li>
         ))}
       </ul>
