@@ -6,18 +6,20 @@ import Link from "next/link";
 import { auth } from "@/auth";
 import { EnrollCourse } from "@/components/enroll-course";
 import { Button } from "@/components/ui/button";
+import { getCategoryById } from "@/queries/categories";
 import { hasEnrollmentForCourse } from "@/queries/enrollments";
 import { getUserByEmail } from "@/queries/users";
 
 const CourseCard = async ({ course }) => {
   const session = await auth();
-
+  const category = await getCategoryById(course?.category);
   const loggedInUser = await getUserByEmail(session?.user?.email);
 
   const hasEnrollment = await hasEnrollmentForCourse(
     course?.id,
     loggedInUser?.id
   );
+  const categoryTitle = category?.title || "Unknown Category";
 
   return (
     <div className="group hover:shadow-sm transition overflow-hidden border rounded-3xl p-3 h-full">
@@ -35,9 +37,9 @@ const CourseCard = async ({ course }) => {
             <div className="text-lg md:text-base mb-2 font-medium group-hover:text-sky-700 line-clamp-2">
               {course?.title}
             </div>
-            {course?.category && (
+            {categoryTitle && (
               <span className="text-xs w-fit rounded-lg px-2.5 p-2 bg-[rgba(23,162,184,.08)] text-[#17a2b8] font-semibold">
-                {course?.category?.title}
+                {categoryTitle}
               </span>
             )}
 

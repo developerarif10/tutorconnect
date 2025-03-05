@@ -11,6 +11,12 @@ export async function getCategories() {
   return replaceMongoIdInArray(categories);
 }
 
+export async function getCategoryById(categoryId) {
+  await dbConnect();
+  const category = await Category.findById(categoryId).lean();
+  return replaceMongoIdInObject(category);
+}
+
 export async function getCategoryDetails(categoryId) {
   try {
     await dbConnect();
